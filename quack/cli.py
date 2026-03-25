@@ -5,7 +5,7 @@ import json
 import sys
 from typing import List, Dict
 
-from .core import search, SearchError, NoResultsError, RequestError
+from .core import search, fetch, SearchError, NoResultsError, RequestError, FetchError
 
 # Import version directly to avoid circular import
 from importlib.metadata import version as get_version
@@ -19,36 +19,56 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  quack "python programming"            # Basic search
-  quack "python programming" --max 5    # Limit to 5 results
-  quack "python programming" --json     # JSON output
+  quack search "python programming"            # Basic search
+  quack search "python programming" --max 5    # Limit to 5 results
+  quack search "python programming" --json     # JSON output
         """
     )
     
-    parser.add_argument(
+    # Create subparsers for different commands
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+    subparsers.required = True
+    
+    # Search command
+    search_parser = subparsers.add_parser('search', help='Search DuckDuckGo')
+    search_parser.add_argument(
         "query",
         nargs="+",
         help="Search query"
     )
-    
-    parser.add_argument(
+    search_parser.add_argument(
         "--max", "--max-results",
         type=int,
         default=10,
         help="Maximum number of results to return (default: 10)"
     )
-    
-    parser.add_argument(
+    search_parser.add_argument(
         "--json",
         action="store_true",
         help="Output results as JSON"
     )
-    
-    parser.add_argument(
+    search_parser.add_argument(
         "--timeout",
         type=int,
         default=30,
         help="Request timeout in seconds (default: 30)"
+    )
+    
+    # Fetch command (placeholder for now)
+    fetch_parser = subparsers.add_parser('fetch', help='Fetch webpage content')
+    fetch_parser.add_argument(
+        "url",
+        help="URL to fetch"
+    )
+    fetch_parser.add_argument(
+        "--timeout",
+        type=int,
+        default=30,
+        help="Request timeout in seconds (default: 30)"
+    )
+    fetch_parser.add_argument(
+        "--output", "-o",
+        help="Output file to save content"
     )
     
     parser.add_argument(
@@ -60,18 +80,31 @@ Examples:
     
     args = parser.parse_args()
     
-    # Combine query arguments into single string
-    query = " ".join(args.query)
-    
     try:
-        # Perform search
-        results = search(query, max_results=args.max, timeout=args.timeout)
-        
-        # Output results
-        if args.json:
-            print(json.dumps(results, indent=2, ensure_ascii=False))
-        else:
-            _print_text_results(results)
+        if args.command == 'search':
+            # Combine query arguments into single string
+            query = " ".join(args.query)
+            
+            # Perform search
+            results = search(query, max_results=args.max, timeout=args.timeout)
+            
+            # Output results
+            if args.json:
+                print(json.dumps(results, indent=2, ensure_ascii=False))
+            else:
+                _print_text_results(results)
+                
+        elif args.command == 'fetch':
+            # Perform fetch
+            content = fetch(args.url, timeout=args.timeout)
+            
+            # Output results
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                print(f"Content saved to {args.output}")
+            else:
+                print(content)
             
     except ValueError as e:
         print(f"Invalid input: {str(e)}", file=sys.stderr)
@@ -80,7 +113,10 @@ Examples:
         print(f"No results found: {str(e)}", file=sys.stderr)
         sys.exit(1)
     except RequestError as e:
-        print(f"Search request failed: {str(e)}", file=sys.stderr)
+        print(f"Request failed: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+    except FetchError as e:
+        print(f"Fetch error: {str(e)}", file=sys.stderr)
         sys.exit(1)
     except SearchError as e:
         print(f"Search error: {str(e)}", file=sys.stderr)

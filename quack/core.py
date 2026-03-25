@@ -24,6 +24,11 @@ class RequestError(SearchError):
     pass
 
 
+class FetchError(SearchError):
+    """Exception raised when fetch request fails."""
+    pass
+
+
 def search(query: str, max_results: int = 10, timeout: int = 30, max_retries: int = 3) -> List[Dict[str, str]]:
     """
     Search DuckDuckGo and return results.
@@ -182,3 +187,57 @@ def _clean_result(result: Dict[str, str]) -> Optional[Dict[str, str]]:
         'href': href,
         'body': body
     }
+
+
+def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
+    """
+    Fetch webpage content from a URL.
+    
+    Args:
+        url: URL to fetch
+        timeout: Request timeout in seconds (default: 30)
+        max_retries: Maximum number of retry attempts (default: 3)
+        
+    Returns:
+        Webpage HTML content as string
+        
+    Raises:
+        ValueError: If URL is invalid
+        RequestError: If fetch request fails after retries
+        FetchError: If content cannot be retrieved
+    """
+    # Validate URL
+    if not url or not isinstance(url, str):
+        raise ValueError("URL must be a non-empty string")
+    
+    url = url.strip()
+    if not (url.startswith('http://') or url.startswith('https://')):
+        raise ValueError("URL must start with http:// or https://")
+    
+    if not isinstance(max_retries, int) or max_retries < 0:
+        raise ValueError("max_retries must be a non-negative integer")
+    
+    # Create browser session with primp - randomize browser config
+    browser = primp.Client(
+        impersonate="random",
+        impersonate_os="random"
+    )
+    
+    # Retry logic
+    for attempt in range(max_retries + 1):
+        try:
+            # Fetch webpage with browser impersonation
+            response = browser.get(url, timeout=timeout)
+            response.raise_for_status()
+            
+            # Return raw HTML content
+            return response.text
+            
+        except Exception as e:
+            if attempt < max_retries:
+                # Exponential backoff
+                wait_time = (2 ** attempt) * 0.5
+                time.sleep(wait_time)
+                continue
+            else:
+                raise FetchError(f"Fetch failed after {max_retries} retries: {str(e)}")

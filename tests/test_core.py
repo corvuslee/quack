@@ -2,7 +2,7 @@
 
 import pytest
 from unittest.mock import patch, MagicMock
-from quack.core import search, RequestError, _extract_clean_url, _clean_result
+from quack.core import search, fetch, RequestError, FetchError, _extract_clean_url, _clean_result
 
 
 class TestExtractCleanUrl:
@@ -215,3 +215,124 @@ class TestSearchRetryLogic:
         assert len(results) == 1
         assert results[0]["title"] == "Example"
         assert results[0]["href"] == "https://example.com"
+
+
+class TestFetchFunction:
+    """Test fetch function."""
+
+    def test_fetch_url_validation(self):
+        """Test URL validation in fetch function."""
+        # Test empty URL
+        with pytest.raises(ValueError, match="URL must be a non-empty string"):
+            fetch("")
+        
+        # Test None URL
+        with pytest.raises(ValueError, match="URL must be a non-empty string"):
+            fetch(None)
+        
+        # Test non-string URL
+        with pytest.raises(ValueError, match="URL must be a non-empty string"):
+            fetch(123)
+        
+        # Test URL without http/https prefix
+        with pytest.raises(ValueError, match="URL must start with http:// or https://"):
+            fetch("example.com")
+        
+        # Test URL with whitespace
+        with pytest.raises(ValueError, match="URL must start with http:// or https://"):
+            fetch("  example.com  ")
+
+    def test_fetch_invalid_max_retries(self):
+        """Test that invalid max_retries raises ValueError."""
+        with pytest.raises(ValueError, match="max_retries must be a non-negative integer"):
+            fetch("https://example.com", max_retries=-1)
+        
+        with pytest.raises(ValueError, match="max_retries must be a non-negative integer"):
+            fetch("https://example.com", max_retries="invalid")
+
+    @patch('quack.core.primp.Client')
+    def test_fetch_successful(self, mock_client):
+        """Test successful fetch operation."""
+        # Mock browser and response
+        mock_browser = MagicMock()
+        mock_response = MagicMock()
+        mock_response.text = "<html>Test content</html>"
+        mock_response.raise_for_status.return_value = None
+        mock_browser.get.return_value = mock_response
+        mock_client.return_value = mock_browser
+        
+        # Call fetch
+        content = fetch("https://example.com", timeout=30, max_retries=1)
+        
+        # Verify the result
+        assert content == "<html>Test content</html>"
+        
+        # Verify browser was called with correct parameters
+        mock_client.assert_called_once()
+        mock_browser.get.assert_called_once_with("https://example.com", timeout=30)
+
+    @patch('quack.core.primp.Client')
+    def test_fetch_retry_logic(self, mock_client):
+        """Test retry logic in fetch function."""
+        # Mock browser that fails first time, succeeds second time
+        mock_browser = MagicMock()
+        
+        # First call fails, second succeeds
+        mock_browser.get.side_effect = [
+            Exception("Connection error"),
+            MagicMock(text="<html>Success</html>", raise_for_status=MagicMock())
+        ]
+        mock_client.return_value = mock_browser
+        
+        # This should succeed on second attempt
+        content = fetch("https://example.com", max_retries=1)
+        
+        # Should have been called twice
+        assert mock_browser.get.call_count == 2
+        
+        # Should return successful content
+        assert content == "<html>Success</html>"
+
+    @patch('quack.core.primp.Client')
+    @patch('quack.core.time.sleep')
+    def test_fetch_exponential_backoff(self, mock_sleep, mock_client):
+        """Test exponential backoff in retry logic."""
+        # Mock browser that fails first time, succeeds second time
+        mock_browser = MagicMock()
+        mock_browser.get.side_effect = [
+            Exception("Connection error"),
+            MagicMock(text="<html>Success</html>", raise_for_status=MagicMock())
+        ]
+        mock_client.return_value = mock_browser
+        
+        # Call fetch
+        content = fetch("https://example.com", max_retries=1)
+        
+        # Verify exponential backoff was used (2^0 * 0.5 = 0.5 seconds)
+        mock_sleep.assert_called_once_with(0.5)
+        assert content == "<html>Success</html>"
+
+    @patch('quack.core.primp.Client')
+    def test_fetch_failure_after_retries(self, mock_client):
+        """Test that FetchError is raised after max retries."""
+        mock_browser = MagicMock()
+        mock_browser.get.side_effect = Exception("Connection error")
+        mock_client.return_value = mock_browser
+        
+        with pytest.raises(FetchError, match="Fetch failed after 2 retries"):
+            fetch("https://example.com", max_retries=2)
+        
+        # Should have been called 3 times (initial + 2 retries)
+        assert mock_browser.get.call_count == 3
+
+    @patch('quack.core.primp.Client')
+    def test_fetch_http_error(self, mock_client):
+        """Test handling of HTTP errors."""
+        mock_browser = MagicMock()
+        mock_response = MagicMock()
+        mock_response.raise_for_status.side_effect = Exception("404 Not Found")
+        mock_browser.get.return_value = mock_response
+        mock_client.return_value = mock_browser
+        
+        with pytest.raises(FetchError, match="Fetch failed after 0 retries"):
+            fetch("https://example.com", max_retries=0)
