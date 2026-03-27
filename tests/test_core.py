@@ -195,10 +195,10 @@ class TestSearchRetryLogic:
         # Mock browser that fails first time, succeeds second time
         mock_browser = MagicMock()
         
-        # First call fails, second succeeds
+        # First call fails, second succeeds with proper HTML structure
         mock_browser.get.side_effect = [
             Exception("Connection error"),
-            MagicMock(text="<html><div class=\"result\"><a class=\"result__a\" href=\"https://example.com\">Example</a></div></html>", raise_for_status=MagicMock())
+            MagicMock(text="""<html><div class="result web-result"><a class="result__a" href="https://example.com">Example</a><a class="result__snippet">Test description</a></div></html>""", raise_for_status=MagicMock())
         ]
         mock_client.return_value = mock_browser
         
@@ -207,6 +207,10 @@ class TestSearchRetryLogic:
         
         # Should have been called twice
         assert mock_browser.get.call_count == 2
+        # Should have results
+        assert len(results) == 1
+        assert results[0]['title'] == "Example"
+        assert results[0]['href'] == "https://example.com"
         
         # Should have slept between retries
         assert mock_sleep.call_count == 1
@@ -264,8 +268,8 @@ class TestFetchFunction:
         # Call fetch
         content = fetch("https://example.com", timeout=30, max_retries=1)
         
-        # Verify the result
-        assert content == "<html>Test content</html>"
+        # Verify the result - should be markdown, not HTML
+        assert content == "Test content\n"
         
         # Verify browser was called with correct parameters
         mock_client.assert_called_once()
@@ -290,8 +294,8 @@ class TestFetchFunction:
         # Should have been called twice
         assert mock_browser.get.call_count == 2
         
-        # Should return successful content
-        assert content == "<html>Success</html>"
+        # Should return successful content (markdown, not HTML)
+        assert content == "Success\n"
 
     @patch('quack.core.primp.Client')
     @patch('quack.core.time.sleep')
@@ -310,7 +314,7 @@ class TestFetchFunction:
         
         # Verify exponential backoff was used (2^0 * 0.5 = 0.5 seconds)
         mock_sleep.assert_called_once_with(0.5)
-        assert content == "<html>Success</html>"
+        assert content == "Success\n"
 
     @patch('quack.core.primp.Client')
     def test_fetch_failure_after_retries(self, mock_client):

@@ -189,9 +189,34 @@ def _clean_result(result: Dict[str, str]) -> Optional[Dict[str, str]]:
     }
 
 
+def _html_to_markdown(html_content: str) -> str:
+    """
+    Convert HTML content to Markdown using html2text.
+    
+    Args:
+        html_content: HTML content as string
+        
+    Returns:
+        Markdown content as string
+    """
+    import html2text
+    
+    # Create html2text converter with reasonable defaults
+    converter = html2text.HTML2Text()
+    converter.body_width = 0  # Don't wrap lines
+    converter.ignore_links = False  # Keep links
+    converter.ignore_images = False  # Keep images
+    converter.ignore_emphasis = False  # Keep emphasis
+    
+    # Convert HTML to Markdown
+    markdown_content = converter.handle(html_content)
+    
+    return markdown_content
+
+
 def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
     """
-    Fetch webpage content from a URL.
+    Fetch webpage content from a URL and convert to Markdown.
     
     Args:
         url: URL to fetch
@@ -199,7 +224,7 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
         max_retries: Maximum number of retry attempts (default: 3)
         
     Returns:
-        Webpage HTML content as string
+        Webpage content as Markdown string
         
     Raises:
         ValueError: If URL is invalid
@@ -230,8 +255,11 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
             response = browser.get(url, timeout=timeout)
             response.raise_for_status()
             
-            # Return raw HTML content
-            return response.text
+            # Convert HTML to Markdown using html2text
+            html_content = response.text
+            markdown_content = _html_to_markdown(html_content)
+            
+            return markdown_content
             
         except Exception as e:
             if attempt < max_retries:

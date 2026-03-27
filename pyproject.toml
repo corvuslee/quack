@@ -9,6 +9,7 @@ description = "DuckDuckGo search with browser impersonation"
 readme = "README.md"
 license = {text = "MIT"}
 dependencies = [
+    "html2text>=2025.4.15",
     "lxml>=6.0.2",
     "primp>=1.1.3",
 ]

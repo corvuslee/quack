@@ -7,7 +7,7 @@ A lightweight Python tool for searching DuckDuckGo with browser impersonation. D
 - ✅ **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
 - ✅ **Simple API**: Easy-to-use Python interface and CLI
 - ✅ **JSON Output**: Structured results for programmatic use
-- ✅ **Minimal Dependencies**: Only requires `primp` and `lxml`
+- ✅ **Minimal Dependencies**: Only requires `primp`, `lxml`, and `html2text`
 
 ## Installation
 
@@ -21,21 +21,26 @@ uv tool install .
 ### Python API
 
 ```python
-from quack import search
+from quack import search, fetch
 
+# Search DuckDuckGo
 results = search("python programming", max_results=5)
 for result in results:
     print(f"{result['title']}: {result['href']}")
+
+# Fetch webpage content
+content = fetch("https://www.python.org")
+print(content[:500])  # Print first 500 characters
 ```
 
 ### Command Line
 
 ```bash
 # Basic search
-quack "python programming"
+quack search "python programming"
 
-# With options
-quack "python programming" --max 5 --json
+# Fetch webpage content
+quack fetch "https://www.python.org"
 ```
 
 ## Example Output

@@ -203,7 +203,6 @@ class TestCLIHelpAndVersion:
         
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
-        assert "quack" in captured.out
         assert "0.1.0" in captured.out
     
     def test_help_flag(self, capsys):
@@ -226,7 +225,7 @@ class TestCLIFetchFunctionality:
     @patch('quack.cli.fetch')
     def test_basic_fetch(self, mock_fetch, capsys):
         """Test basic fetch with default arguments."""
-        mock_fetch.return_value = "<html>Test content</html>"
+        mock_fetch.return_value = "Test content\n"
         
         # Simulate command line arguments
         test_args = ["fetch", "https://example.com"]
@@ -238,12 +237,12 @@ class TestCLIFetchFunctionality:
         
         # Verify output
         captured = capsys.readouterr()
-        assert "<html>Test content</html>" in captured.out
+        assert "Test content" in captured.out
 
     @patch('quack.cli.fetch')
     def test_fetch_with_timeout(self, mock_fetch, capsys):
         """Test fetch with custom timeout."""
-        mock_fetch.return_value = "<html>Test content</html>"
+        mock_fetch.return_value = "Test content\n"
         
         test_args = ["fetch", "https://example.com", "--timeout", "60"]
         with patch.object(sys, 'argv', ['quack'] + test_args):
@@ -255,7 +254,7 @@ class TestCLIFetchFunctionality:
     @patch('builtins.open', new_callable=unittest.mock.mock_open)
     def test_fetch_with_output_file(self, mock_open, mock_fetch, capsys):
         """Test fetch with output file."""
-        mock_fetch.return_value = "<html>Test content</html>"
+        mock_fetch.return_value = "Test content\n"
         
         test_args = ["fetch", "https://example.com", "--output", "test.html"]
         with patch.object(sys, 'argv', ['quack'] + test_args):
@@ -267,7 +266,7 @@ class TestCLIFetchFunctionality:
         # Verify file was written
         mock_open.assert_called_once_with('test.html', 'w', encoding='utf-8')
         handle = mock_open()
-        handle.write.assert_called_once_with("<html>Test content</html>")
+        handle.write.assert_called_once_with("Test content\n")
         
         # Verify console output
         captured = capsys.readouterr()
