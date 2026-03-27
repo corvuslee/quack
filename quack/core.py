@@ -70,7 +70,7 @@ def search(query: str, max_results: int = 10, timeout: int = 30, max_retries: in
     params = {
         'q': query,
         'kl': 'uk-en',  # UK English
-        'df': 'd',      # Date format
+        'df': '',       # Any time (no date filtering)
     }
     
     search_url = f"https://html.duckduckgo.com/html/?{urlencode(params)}"
@@ -87,7 +87,7 @@ def search(query: str, max_results: int = 10, timeout: int = 30, max_retries: in
             
             # Extract search results
             results = []
-            result_elements = doc.xpath('//div[contains(@class, "result")]')
+            result_elements = doc.xpath('//div[contains(@class, "result") and contains(@class, "web-result")]')
             
             for element in result_elements[:max_results]:
                 try:
