@@ -98,7 +98,7 @@ def search(query: str, max_results: int = 10, timeout: int = 30, max_retries: in
                         href = title_element[0].get('href', '')
                         
                         # Clean URL
-                        if href and href.startswith('/link?'):
+                        if href and ('/link?' in href or 'duckduckgo.com/l/' in href):
                             href = _extract_clean_url(href)
                         
                         # Extract description
