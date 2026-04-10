@@ -1,5 +1,7 @@
 # Quack 🦆
 
+![CI](https://github.com/corvuslee/quack/actions/workflows/ci.yml/badge.svg)
+
 A Python and CLI tool for searching DuckDuckGo with browser impersonation. Designed for LLM agents and developers who need programmatic access to DuckDuckGo search results.
 
 ## Features
@@ -12,7 +14,7 @@ A Python and CLI tool for searching DuckDuckGo with browser impersonation. Desig
 ## Installation
 
 ```bash
-uv tool install .
+uv tool install git+https://github.com/corvuslee/quack.git
 ```
 
 ## Usage
