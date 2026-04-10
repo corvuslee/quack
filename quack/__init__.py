@@ -6,14 +6,14 @@ from .utils import validate_query, clean_query, filter_results
 
 __version__ = "0.1.0"
 __all__ = [
-    "search", 
+    "search",
     "fetch",
     "main",
-    "SearchError", 
-    "NoResultsError", 
+    "SearchError",
+    "NoResultsError",
     "RequestError",
     "FetchError",
     "validate_query",
-    "clean_query", 
-    "filter_results"
+    "clean_query",
+    "filter_results",
 ]

@@ -5,14 +5,14 @@ from quack.utils import validate_query, clean_query, filter_results
 
 class TestValidateQuery:
     """Test query validation function."""
-    
+
     def test_valid_queries(self):
         """Test that valid queries return True."""
         assert validate_query("python programming")
         assert validate_query("hello world")
         assert validate_query("a")
         assert validate_query("  valid  ")
-    
+
     def test_invalid_queries(self):
         """Test that invalid queries return False."""
         assert not validate_query("")
@@ -25,16 +25,16 @@ class TestValidateQuery:
 
 class TestCleanQuery:
     """Test query cleaning function."""
-    
+
     def test_clean_whitespace(self):
         """Test removing extra whitespace."""
         assert clean_query("  hello   world  ") == "hello world"
         assert clean_query("\tpython\nprogramming\r") == "python programming"
-    
+
     def test_clean_control_characters(self):
         """Test that control characters are passed through to downstream."""
         # Control characters are preserved and passed to downstream search engine
-        result = clean_query("test\x1Fmore")
+        result = clean_query("test\x1fmore")
         assert "test" in result and "more" in result
         # Basic whitespace still works normally
         assert clean_query("hello  world") == "hello world"
@@ -51,11 +51,11 @@ class TestCleanQuery:
     def test_clean_mixed_content(self):
         """Test mixed control characters, Unicode, and normal text."""
         # All characters are preserved, only whitespace is normalized
-        result = clean_query("hello  \x1F  \u2003  world")
+        result = clean_query("hello  \x1f  \u2003  world")
         assert "hello" in result and "world" in result
         # Verify whitespace is normalized but content is preserved
         assert result.count(" ") == 1  # Multiple spaces become single space
-    
+
     def test_empty_query(self):
         """Test handling of empty queries."""
         assert clean_query("") == ""
@@ -65,40 +65,40 @@ class TestCleanQuery:
 
 class TestFilterResults:
     """Test result filtering function."""
-    
+
     def test_filter_by_title_length(self):
         """Test filtering by minimum title length."""
         results = [
             {"title": "Python", "href": "https://python.org"},
             {"title": "Py", "href": "https://py.org"},
             {"title": "P", "href": "https://p.org"},
-            {"title": "", "href": "https://empty.org"}
+            {"title": "", "href": "https://empty.org"},
         ]
-        
+
         filtered = filter_results(results, min_title_length=3)
         assert len(filtered) == 1
         assert filtered[0]["title"] == "Python"
-    
+
     def test_filter_invalid_urls(self):
         """Test filtering results with invalid URLs."""
         results = [
             {"title": "Valid", "href": "https://valid.com"},
             {"title": "No Protocol", "href": "valid.com"},
             {"title": "Empty URL", "href": ""},
-            {"title": "Relative", "href": "/path"}
+            {"title": "Relative", "href": "/path"},
         ]
-        
+
         filtered = filter_results(results)
         assert len(filtered) == 1
         assert filtered[0]["title"] == "Valid"
-    
+
     def test_keep_valid_results(self):
         """Test that valid results are kept."""
         results = [
             {"title": "Python Programming", "href": "https://python.org"},
-            {"title": "DuckDuckGo", "href": "https://duckduckgo.com"}
+            {"title": "DuckDuckGo", "href": "https://duckduckgo.com"},
         ]
-        
+
         filtered = filter_results(results)
         assert len(filtered) == 2
 
@@ -108,9 +108,9 @@ class TestFilterResults:
             {"title": "Valid Title", "href": "https://valid.com"},
             {"title": None, "href": "https://none-title.com"},
             {"title": "Another Valid", "href": None},
-            {"title": None, "href": None}
+            {"title": None, "href": None},
         ]
-        
+
         filtered = filter_results(results)
         # Only the first result should pass (has both valid title and URL)
         assert len(filtered) == 1
@@ -131,9 +131,9 @@ class TestFilterResults:
             {"title": "No Protocol", "href": "example.com"},
             {"title": "Empty URL", "href": ""},
             {"title": "About Blank", "href": "about:blank"},
-            {"title": "Invalid Scheme", "href": "invalid://example.com"}
+            {"title": "Invalid Scheme", "href": "invalid://example.com"},
         ]
-        
+
         filtered = filter_results(results)
         # Only HTTP/HTTPS URLs should pass
         assert len(filtered) == 2
@@ -145,13 +145,13 @@ class TestFilterResults:
         """Test filtering results with very long titles/URLs."""
         long_title = "A" * 500  # Very long title
         long_url = "https://" + "x" * 1000 + ".com"  # Very long URL
-        
+
         results = [
             {"title": long_title, "href": "https://valid.com"},
             {"title": "Short Title", "href": long_url},
-            {"title": "Normal", "href": "https://normal.com"}
+            {"title": "Normal", "href": "https://normal.com"},
         ]
-        
+
         filtered = filter_results(results)
         # All should pass (length doesn't affect basic filtering)
         assert len(filtered) == 3
@@ -163,15 +163,18 @@ class TestFilterResults:
         """Test filtering URL special cases and malformed URLs."""
         results = [
             {"title": "Valid with Port", "href": "https://example.com:8080"},
-            {"title": "Valid with Path", "href": "https://example.com/path?query=value"},
+            {
+                "title": "Valid with Path",
+                "href": "https://example.com/path?query=value",
+            },
             {"title": "Valid with Fragment", "href": "https://example.com/#section"},
             {"title": "Valid IP Address", "href": "http://192.168.1.1"},
             {"title": "Missing Protocol", "href": "//example.com"},
             {"title": "Spaces in URL", "href": "https://example.com/path with spaces"},
             {"title": "Invalid Characters", "href": "https://example.com/<script>"},
-            {"title": "Localhost", "href": "http://localhost:3000"}
+            {"title": "Localhost", "href": "http://localhost:3000"},
         ]
-        
+
         filtered = filter_results(results)
         # Should include valid HTTP/HTTPS URLs (our filter only checks protocol)
         valid_titles = [r["title"] for r in filtered]
@@ -186,6 +189,3 @@ class TestFilterResults:
         assert "Invalid Characters" in valid_titles
         # Should exclude non-HTTP/HTTPS URLs
         assert "Missing Protocol" not in valid_titles
-
-
-
