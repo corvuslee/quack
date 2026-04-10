@@ -1,18 +1,17 @@
 # Quack 🦆
 
-A lightweight Python tool for searching DuckDuckGo with browser impersonation. Designed for LLM agents and developers who need programmatic access to DuckDuckGo search results.
+A Python and CLI tool for searching DuckDuckGo with browser impersonation. Designed for LLM agents and developers who need programmatic access to DuckDuckGo search results.
 
 ## Features
 
 - ✅ **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
 - ✅ **Simple API**: Easy-to-use Python interface and CLI
 - ✅ **JSON Output**: Structured results for programmatic use
-- ✅ **Minimal Dependencies**: Only requires `primp`, `lxml`, and `html2text`
+- ✅ **Minimal Dependencies**: Only requires `primp`, `selectolax`, and `html2text`
 
 ## Installation
 
 ```bash
-# Using uv (recommended)
 uv tool install .
 ```
 
@@ -23,7 +22,7 @@ uv tool install .
 ```python
 from quack import search, fetch
 
-# Search DuckDuckGo
+# Search
 results = search("python programming", max_results=5)
 for result in results:
     print(f"{result['title']}: {result['href']}")
@@ -36,33 +35,15 @@ print(content[:500])  # Print first 500 characters
 ### Command Line
 
 ```bash
-# Basic search
+# Basic search (for human)
 quack search "python programming"
+
+# Get JSON output (for machine)
+quack search "python programming" --json
 
 # Fetch webpage content
 quack fetch "https://www.python.org"
 ```
-
-## Example Output
-
-```json
-[
-  {
-    "title": "Python.org",
-    "href": "https://www.python.org",
-    "body": "The official home of the Python Programming Language."
-  },
-  {
-    "title": "Python Documentation",
-    "href": "https://docs.python.org/3",
-    "body": "Official Python 3 documentation."
-  }
-]
-```
-
-## License
-
-MIT
 
 ---
 

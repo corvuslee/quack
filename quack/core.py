@@ -6,7 +6,7 @@ from typing import List, Dict, Optional
 from urllib.parse import urlencode, unquote
 
 import primp
-from lxml import html
+from selectolax.parser import HTMLParser
 
 
 class SearchError(Exception):
@@ -83,27 +83,27 @@ def search(query: str, max_results: int = 10, timeout: int = 30, max_retries: in
             response.raise_for_status()
             
             # Parse HTML content
-            doc = html.fromstring(response.text)
+            doc = HTMLParser(response.text)
             
             # Extract search results
             results = []
-            result_elements = doc.xpath('//div[contains(@class, "result") and contains(@class, "web-result")]')
+            result_elements = doc.css('div.result.web-result')
             
             for element in result_elements[:max_results]:
                 try:
                     # Extract title and URL
-                    title_element = element.xpath('.//a[contains(@class, "result__a") or contains(@class, "result__url")]')
+                    title_element = element.css_first('a.result__a, a.result__url')
                     if title_element:
-                        title = title_element[0].text_content().strip()
-                        href = title_element[0].get('href', '')
+                        title = title_element.text(deep=True, separator=' ').strip()
+                        href = title_element.attributes.get('href', '')
                         
                         # Clean URL
                         if href and ('/link?' in href or 'duckduckgo.com/l/' in href):
                             href = _extract_clean_url(href)
                         
                         # Extract description
-                        body_element = element.xpath('.//a[contains(@class, "result__snippet")]')
-                        body = body_element[0].text_content().strip() if body_element else ''
+                        body_element = element.css_first('a.result__snippet')
+                        body = body_element.text(deep=True, separator=' ').strip() if body_element else ''
                         
                         # Clean and filter results
                         cleaned_result = _clean_result({'title': title, 'href': href, 'body': body})
