@@ -1,5 +1,7 @@
 """Integration tests for Quack - tests actual DuckDuckGo searches."""
 
+import time
+
 from quack import search
 
 
@@ -36,9 +38,15 @@ class TestIntegration:
         results1 = search("Python documentation")
         assert len(results1) > 0
 
+        # Small delay between searches to avoid rate limiting
+        time.sleep(1)
+
         # Query with special characters
         results2 = search("Python 3.12+ features")
         assert len(results2) > 0
+
+        # Small delay between searches to avoid rate limiting
+        time.sleep(1)
 
         # Unicode query
         results3 = search("Python 编程")
