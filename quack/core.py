@@ -221,7 +221,7 @@ def _html_to_markdown(html_content: str) -> str:
     return markdown_content
 
 
-def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
+def fetch(url: str, timeout: int = 30, max_retries: int = 3, http2_only: bool = True) -> str:
     """
     Fetch webpage content from a URL and convert to Markdown.
 
@@ -229,6 +229,7 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
         url: URL to fetch
         timeout: Request timeout in seconds (default: 30)
         max_retries: Maximum number of retry attempts (default: 3)
+        http2_only: Force HTTP/2 only (default: True)
 
     Returns:
         Webpage content as Markdown string
@@ -249,14 +250,27 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
     if not isinstance(max_retries, int) or max_retries < 0:
         raise ValueError("max_retries must be a non-negative integer")
 
-    # Create browser session with primp - randomize browser config
-    browser = primp.Client(impersonate="random", impersonate_os="random")
+    # Create browser session with primp - use Safari on macOS
+    browser = primp.Client(
+        impersonate="safari",
+        impersonate_os="macos",
+        http2_only=http2_only,
+    )
+
+    # Realistic headers to appear as legitimate browser navigation
+    headers = {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+    }
 
     # Retry logic
     for attempt in range(max_retries + 1):
         try:
             # Fetch webpage with browser impersonation
-            response = browser.get(url, timeout=timeout)
+            response = browser.get(url, timeout=timeout, headers=headers)
             response.raise_for_status()
 
             # Convert HTML to Markdown using html2text
