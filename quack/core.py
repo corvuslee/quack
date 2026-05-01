@@ -221,7 +221,9 @@ def _html_to_markdown(html_content: str) -> str:
     return markdown_content
 
 
-def fetch(url: str, timeout: int = 30, max_retries: int = 3, http2_only: bool = True) -> str:
+def fetch(
+    url: str, timeout: int = 30, max_retries: int = 3, http2_only: bool = True
+) -> str:
     """
     Fetch webpage content from a URL and convert to Markdown.
 
