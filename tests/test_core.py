@@ -279,7 +279,16 @@ class TestFetchFunction:
 
         # Verify browser was called with correct parameters
         mock_client.assert_called_once()
-        mock_browser.get.assert_called_once_with("https://example.com", timeout=30)
+        expected_headers = {
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-GB,en;q=0.9",
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+        }
+        mock_browser.get.assert_called_once_with(
+            "https://example.com", timeout=30, headers=expected_headers
+        )
 
     @patch("quack.core.primp.Client")
     def test_fetch_retry_logic(self, mock_client):

@@ -4,7 +4,7 @@ from .core import search, fetch, SearchError, NoResultsError, RequestError, Fetc
 from .cli import main
 from .utils import validate_query, clean_query, filter_results
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = [
     "search",
     "fetch",
