@@ -9,13 +9,24 @@ A Python and CLI tool for searching DuckDuckGo with browser impersonation. Desig
 - ✅ **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
 - ✅ **Simple API**: Easy-to-use Python interface and CLI
 - ✅ **JSON Output**: Structured results for programmatic use
-- ✅ **Minimal Dependencies**: Only requires `primp`, `selectolax`, and `html2text`
+- ✅ **Minimal Dependencies**: Core requires only `primp`, `selectolax`, and `html2text`
+- ✅ (Optional) **JavaScript Rendering**: Render JavaScript pages with SeleniumBase UC Mode (much heavier dependencies)
 
 ## Installation
+
+### Core (minimal dependencies)
 
 ```bash
 uv tool install git+https://github.com/corvuslee/quack.git
 ```
+
+### With JavaScript rendering support
+
+```bash
+uv tool install "git+https://github.com/corvuslee/quack.git[render]"
+```
+
+> **Note**: The `render` extra installs `seleniumbase` and its dependencies (including Chrome/ChromeDriver). This is optional and only needed for rendering JavaScript-heavy pages.
 
 ## Usage
 
@@ -45,6 +56,9 @@ quack search "python programming" --json
 
 # Fetch webpage content
 quack fetch "https://www.python.org"
+
+# Render pages with javascript
+quack render "https://www.python.org"
 ```
 
 ---

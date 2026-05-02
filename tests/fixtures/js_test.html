@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Render Test</title>
+</head>
+<body>
+    <h1 id="status">JavaScript NOT executed</h1>
+    <p id="content">This content is static and visible without JavaScript.</p>
+    <script>
+        document.getElementById('status').textContent = 'JavaScript executed successfully!';
+        document.getElementById('content').textContent = 'This content was modified by JavaScript!';
+    </script>
+</body>
+</html>
