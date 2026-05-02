@@ -10,6 +10,7 @@ from .core import search, fetch, SearchError, NoResultsError, RequestError, Fetc
 # Optional import for render command
 try:
     from .render import render, RenderError
+
     RENDER_AVAILABLE = True
 except ImportError:
     RENDER_AVAILABLE = False
@@ -71,7 +72,9 @@ Examples:
     fetch_parser.add_argument("--output", "-o", help="Output file to save content")
 
     # Render command
-    render_parser = subparsers.add_parser("render", help="Render webpage with JavaScript execution")
+    render_parser = subparsers.add_parser(
+        "render", help="Render webpage with JavaScript execution"
+    )
     render_parser.add_argument("url", help="URL to render")
     render_parser.add_argument(
         "--wait-time",
@@ -122,7 +125,7 @@ Examples:
                 print(
                     "Error: Render command requires SeleniumBase.\n"
                     "Install the optional [render] dependencies\n",
-                    file=sys.stderr
+                    file=sys.stderr,
                 )
                 sys.exit(1)
 

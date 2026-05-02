@@ -35,7 +35,11 @@ def render(
         raise ValueError("URL must be a non-empty string")
 
     url = url.strip()
-    if not (url.startswith("http://") or url.startswith("https://") or url.startswith("file://")):
+    if not (
+        url.startswith("http://")
+        or url.startswith("https://")
+        or url.startswith("file://")
+    ):
         raise ValueError("URL must start with http://, https://, or file://")
 
     try:

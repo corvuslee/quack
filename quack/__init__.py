@@ -7,6 +7,7 @@ from .utils import validate_query, clean_query, filter_results
 # Optional render import
 try:
     from .render import render, RenderError  # noqa: F401
+
     _render_available = True
 except ImportError:
     _render_available = False

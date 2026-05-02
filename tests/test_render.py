@@ -20,7 +20,7 @@ class TestRenderFunction:
 
             # Use file:// URL
             url = f"file://{js_test_file.absolute()}"
-            
+
             # Render the page
             content = render(url, wait_time=2)
 
