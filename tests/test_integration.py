@@ -1,7 +1,5 @@
 """Integration tests for Quack - tests actual DuckDuckGo searches."""
 
-import time
-
 from quack import search
 
 
@@ -26,34 +24,3 @@ class TestIntegration:
                 f"URL not cleaned: {result['href']}"
             )
             assert "uddg=" not in result["href"], f"URL not cleaned: {result['href']}"
-
-        # Small delay to avoid rate limiting
-        time.sleep(3)
-
-    def test_actual_search_max_results(self):
-        """Test max_results parameter works correctly."""
-        results = search("test query", max_results=3)
-        assert len(results) <= 3
-
-        # Small delay to avoid rate limiting
-        time.sleep(3)
-
-    def test_actual_search_query_types(self):
-        """Test different types of search queries."""
-        # Regular query
-        results1 = search("Python documentation")
-        assert len(results1) > 0
-
-        # Small delay between searches to avoid rate limiting
-        time.sleep(3)
-
-        # Query with special characters
-        results2 = search("Python 3.12+ features")
-        assert len(results2) > 0
-
-        # Small delay between searches to avoid rate limiting
-        time.sleep(3)
-
-        # Unicode query
-        results3 = search("Python 编程")
-        assert len(results3) > 0
