@@ -2,15 +2,14 @@
 
 ![CI](https://github.com/corvuslee/quack/actions/workflows/ci.yml/badge.svg)
 
-A Python and CLI tool for searching DuckDuckGo with browser impersonation. Designed for LLM agents and developers who need programmatic access to DuckDuckGo search results.
+A Python and CLI tool for searching DuckDuckGo and fetching webpages with browser impersonation. Designed for LLM agents and developers who need programmatic access to web search and fetch.
 
 ## Features
 
-- ✅ **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
-- ✅ **Simple API**: Easy-to-use Python interface and CLI
-- ✅ **JSON Output**: Structured results for programmatic use
-- ✅ **Minimal Dependencies**: Core requires only `primp`, `selectolax`, and `html2text`
-- ✅ (Optional) **JavaScript Rendering**: Render JavaScript pages with SeleniumBase UC Mode (much heavier dependencies)
+- **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
+- **API**: Python interface and CLI
+- **Minimal Dependencies**: Core requires only `primp`, `selectolax`, and `html2text`
+- (Optional) **JavaScript Rendering**: Render JavaScript pages with SeleniumBase UC Mode (much heavier dependencies)
 
 ## Installation
 
@@ -33,25 +32,23 @@ uv tool install "git+https://github.com/corvuslee/quack.git[render]"
 ### Python API
 
 ```python
-from quack import search, fetch
-
 # Search
+from quack import search
 results = search("python programming", max_results=5)
-for result in results:
-    print(f"{result['title']}: {result['href']}")
 
 # Fetch webpage content
+from quack import fetch
 content = fetch("https://www.python.org")
-print(content[:500])  # Print first 500 characters
+
+# Render JavaScript pages (requires [render] extra)
+from quack import render
+content = render("https://www.python.org")
 ```
 
 ### Command Line
 
 ```bash
-# Basic search (for human)
-quack search "python programming"
-
-# Get JSON output (for machine)
+# Search with JSON output
 quack search "python programming" --json
 
 # Fetch webpage content
@@ -60,7 +57,6 @@ quack fetch "https://www.python.org"
 # Render pages with javascript
 quack render "https://www.python.org"
 ```
-
 ---
 
 *Quack is not affiliated with DuckDuckGo. Use responsibly and respect search engine terms of service.*
