@@ -7,6 +7,16 @@ from typing import List, Dict
 
 from .core import search, fetch, SearchError, NoResultsError, RequestError, FetchError
 
+# Optional import for render command
+try:
+    from .render import render, RenderError
+
+    RENDER_AVAILABLE = True
+except ImportError:
+    RENDER_AVAILABLE = False
+    render = None  # type: ignore
+    RenderError = Exception  # type: ignore
+
 # Import version directly to avoid circular import
 from importlib.metadata import version as get_version
 
@@ -50,7 +60,7 @@ Examples:
         help="Request timeout in seconds (default: 30)",
     )
 
-    # Fetch command (placeholder for now)
+    # Fetch command
     fetch_parser = subparsers.add_parser("fetch", help="Fetch webpage content")
     fetch_parser.add_argument("url", help="URL to fetch")
     fetch_parser.add_argument(
@@ -60,6 +70,19 @@ Examples:
         help="Request timeout in seconds (default: 30)",
     )
     fetch_parser.add_argument("--output", "-o", help="Output file to save content")
+
+    # Render command
+    render_parser = subparsers.add_parser(
+        "render", help="Render webpage with JavaScript execution"
+    )
+    render_parser.add_argument("url", help="URL to render")
+    render_parser.add_argument(
+        "--wait-time",
+        type=int,
+        default=2,
+        help="Wait n second after page load for JS execution (default: 2)",
+    )
+    render_parser.add_argument("--output", "-o", help="Output file to save content")
 
     parser.add_argument(
         "--version",
@@ -96,6 +119,27 @@ Examples:
             else:
                 print(content)
 
+        elif args.command == "render":
+            # Check if render is available
+            if not RENDER_AVAILABLE or render is None:
+                print(
+                    "Error: Render command requires SeleniumBase.\n"
+                    "Install the optional [render] dependencies\n",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+
+            # Perform render
+            content = render(args.url, wait_time=args.wait_time)
+
+            # Output results
+            if args.output:
+                with open(args.output, "w", encoding="utf-8") as f:
+                    f.write(content)
+                print(f"Content saved to {args.output}")
+            else:
+                print(content)
+
     except ValueError as e:
         print(f"Invalid input: {str(e)}", file=sys.stderr)
         sys.exit(1)
@@ -107,6 +151,9 @@ Examples:
         sys.exit(1)
     except FetchError as e:
         print(f"Fetch error: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+    except RenderError as e:
+        print(f"Render error: {str(e)}", file=sys.stderr)
         sys.exit(1)
     except SearchError as e:
         print(f"Search error: {str(e)}", file=sys.stderr)

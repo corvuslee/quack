@@ -7,7 +7,6 @@
   - uv tool install .
 
 ## Code Quality
-- After editing Python files, always run LSP diagnostics (`get_diagnostics`) on the modified files before presenting the result.
 - Static analysers available in the shell:
   - pyright
   - shellcheck

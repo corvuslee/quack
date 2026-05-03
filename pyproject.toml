@@ -1,6 +1,6 @@
 [project]
 name = "quack"
-version = "0.1.1"
+version = "0.2.0"
 requires-python = ">=3.14"
 authors = [
     {name = "corvuslee"}
@@ -25,6 +25,9 @@ repository = "https://github.com/corvuslee/quack"
 test = [
     "pytest>=8.0.0",
     "pytest-mock>=3.14.0",
+]
+render = [
+    "seleniumbase>=4.48.4",
 ]
 
 [build-system]
