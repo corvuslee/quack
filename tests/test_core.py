@@ -327,8 +327,8 @@ class TestFetchFunction:
         # Call fetch
         content = fetch("https://example.com", max_retries=1)
 
-        # Verify exponential backoff was used (2^0 * 0.5 = 0.5 seconds)
-        mock_sleep.assert_called_once_with(0.5)
+        # Verify exponential backoff was used (2^0 = 1 second)
+        mock_sleep.assert_called_once_with(1)
         assert content == "Success\n"
 
     @patch("quack.core.primp.Client")

@@ -130,8 +130,8 @@ def search(
 
         except Exception as e:
             if attempt < max_retries:
-                # Exponential backoff
-                wait_time = (2**attempt) * 0.5
+                # Exponential backoff: 1s, 2s, 4s capped at 10s
+                wait_time = min((2**attempt) * 1.0, 10.0)
                 time.sleep(wait_time)
                 continue
             else:
@@ -283,8 +283,8 @@ def fetch(
 
         except Exception as e:
             if attempt < max_retries:
-                # Exponential backoff
-                wait_time = (2**attempt) * 0.5
+                # Exponential backoff: 1s, 2s, 4s capped at 10s
+                wait_time = min((2**attempt) * 1.0, 10.0)
                 time.sleep(wait_time)
                 continue
             else:
