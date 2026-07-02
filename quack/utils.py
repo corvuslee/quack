@@ -1,7 +1,8 @@
 """Utility functions for Quack."""
 
 import re
-from typing import List, Dict
+from typing import List, Dict, Optional
+from collections.abc import Mapping, Sequence
 
 
 def validate_query(query: str) -> bool:
@@ -39,7 +40,7 @@ def clean_query(query: str) -> str:
 
 
 def filter_results(
-    results: List[Dict[str, str]], min_title_length: int = 3
+    results: Sequence[Mapping[str, Optional[str]]], min_title_length: int = 3
 ) -> List[Dict[str, str]]:
     """
     Filter search results based on quality criteria.
@@ -67,6 +68,8 @@ def filter_results(
         ):
             continue
 
-        filtered.append(result)
+        filtered.append(
+            {"title": title, "href": href, "body": result.get("body") or ""}
+        )
 
     return filtered

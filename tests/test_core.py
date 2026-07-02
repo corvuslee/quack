@@ -52,6 +52,7 @@ class TestCleanResult:
         }
 
         cleaned = _clean_result(result)
+        assert cleaned is not None
         assert cleaned["title"] == "Python Programming"
         assert cleaned["href"] == "https://python.org"
         assert cleaned["body"] == "Learn Python programming"
@@ -65,6 +66,7 @@ class TestCleanResult:
         }
 
         cleaned = _clean_result(result)
+        assert cleaned is not None
         assert cleaned["href"] == "https://example.com"
 
     def test_clean_result_with_protocol_relative_url(self):
@@ -72,6 +74,7 @@ class TestCleanResult:
         result = {"title": "Test Site", "href": "/path", "body": "Test description"}
 
         cleaned = _clean_result(result)
+        assert cleaned is not None
         # Protocol-relative URLs get converted to https:// (not https:///)
         assert cleaned["href"] == "https://path"
 
@@ -109,6 +112,7 @@ class TestCleanResult:
         }
 
         cleaned = _clean_result(result)
+        assert cleaned is not None
         assert cleaned["title"] == "Python Programming Tutorial"
         assert cleaned["body"] == "Learn Python programming today"
 
@@ -124,12 +128,12 @@ class TestSearchValidation:
     def test_invalid_query_none(self):
         """Test that None query raises ValueError."""
         with pytest.raises(ValueError, match="Query must be a non-empty string"):
-            search(None)
+            search(None)  # ty:ignore[invalid-argument-type]
 
     def test_invalid_query_non_string(self):
         """Test that non-string query raises ValueError."""
         with pytest.raises(ValueError, match="Query must be a non-empty string"):
-            search(123)
+            search(123)  # ty:ignore[invalid-argument-type]
 
     def test_invalid_max_results_zero(self):
         """Test that zero max_results raises ValueError."""
@@ -144,7 +148,7 @@ class TestSearchValidation:
     def test_invalid_max_results_non_integer(self):
         """Test that non-integer max_results raises ValueError."""
         with pytest.raises(ValueError, match="max_results must be a positive integer"):
-            search("test", max_results="10")
+            search("test", max_results="10")  # ty:ignore[invalid-argument-type]
 
     def test_invalid_max_retries_negative(self):
         """Test that negative max_retries raises ValueError."""
@@ -234,11 +238,11 @@ class TestFetchFunction:
 
         # Test None URL
         with pytest.raises(ValueError, match="URL must be a non-empty string"):
-            fetch(None)
+            fetch(None)  # ty:ignore[invalid-argument-type]
 
         # Test non-string URL
         with pytest.raises(ValueError, match="URL must be a non-empty string"):
-            fetch(123)
+            fetch(123)  # ty:ignore[invalid-argument-type]
 
         # Test URL without http/https prefix
         with pytest.raises(ValueError, match="URL must start with http:// or https://"):
@@ -258,7 +262,7 @@ class TestFetchFunction:
         with pytest.raises(
             ValueError, match="max_retries must be a non-negative integer"
         ):
-            fetch("https://example.com", max_retries="invalid")
+            fetch("https://example.com", max_retries="invalid")  # ty:ignore[invalid-argument-type]
 
     @patch("quack.core.primp.Client")
     def test_fetch_successful(self, mock_client):

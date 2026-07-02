@@ -17,10 +17,10 @@ class TestValidateQuery:
         """Test that invalid queries return False."""
         assert not validate_query("")
         assert not validate_query("   ")
-        assert not validate_query(None)
-        assert not validate_query(123)
-        assert not validate_query([])
-        assert not validate_query({})
+        assert not validate_query(None)  # ty:ignore[invalid-argument-type]
+        assert not validate_query(123)  # ty:ignore[invalid-argument-type]
+        assert not validate_query([])  # ty:ignore[invalid-argument-type]
+        assert not validate_query({})  # ty:ignore[invalid-argument-type]
 
 
 class TestCleanQuery:
@@ -60,7 +60,7 @@ class TestCleanQuery:
         """Test handling of empty queries."""
         assert clean_query("") == ""
         assert clean_query("   ") == ""
-        assert clean_query(None) == ""
+        assert clean_query(None) == ""  # ty:ignore[invalid-argument-type]
 
 
 class TestFilterResults:

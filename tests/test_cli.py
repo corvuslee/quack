@@ -1,8 +1,7 @@
 """Unit tests for CLI functionality."""
 
 import pytest
-import unittest
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 from quack.cli import main, _print_text_results
 from quack.core import SearchError, NoResultsError, RequestError, FetchError
 import sys
@@ -255,7 +254,7 @@ class TestCLIFetchFunctionality:
         mock_fetch.assert_called_once_with("https://example.com", timeout=60)
 
     @patch("quack.cli.fetch")
-    @patch("builtins.open", new_callable=unittest.mock.mock_open)
+    @patch("builtins.open", new_callable=mock_open)
     def test_fetch_with_output_file(self, mock_open, mock_fetch, capsys):
         """Test fetch with output file."""
         mock_fetch.return_value = "Test content\n"
