@@ -3,6 +3,7 @@
 import re
 import time
 from typing import List, Dict, Optional
+from collections.abc import Mapping
 from urllib.parse import urlencode, unquote
 
 import primp
@@ -139,6 +140,8 @@ def search(
                     f"Search failed after {max_retries} retries: {str(e)}"
                 )
 
+    raise RequestError("Search failed: unreachable")
+
 
 def _extract_clean_url(duckduckgo_url: str) -> str:
     """
@@ -159,7 +162,7 @@ def _extract_clean_url(duckduckgo_url: str) -> str:
     return duckduckgo_url
 
 
-def _clean_whitespace(text: str) -> str:
+def _clean_whitespace(text: Optional[str]) -> str:
     """Clean whitespace in text - strip and normalize spaces."""
     if not text:
         return ""
@@ -167,7 +170,7 @@ def _clean_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text)
 
 
-def _clean_result(result: Dict[str, str]) -> Optional[Dict[str, str]]:
+def _clean_result(result: Mapping[str, Optional[str]]) -> Optional[Dict[str, str]]:
     """
     Clean and filter search results.
 
@@ -185,7 +188,7 @@ def _clean_result(result: Dict[str, str]) -> Optional[Dict[str, str]]:
     title = _clean_whitespace(result["title"])
 
     # Clean URL - ensure it's a valid HTTP/HTTPS URL
-    href = result["href"].strip()
+    href = (result["href"] or "").strip()
     if not href.startswith(("http://", "https://")):
         # Make relative URLs absolute
         href = f"https://{href.lstrip('/')}"
@@ -289,3 +292,5 @@ def fetch(
                 continue
             else:
                 raise FetchError(f"Fetch failed after {max_retries} retries: {str(e)}")
+
+    raise FetchError("Fetch failed: unreachable")

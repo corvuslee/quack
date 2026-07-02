@@ -8,7 +8,7 @@
 
 ## Code Quality
 - Static analysers available in the shell:
-  - pyright
+  - ty
   - shellcheck
 - Linters and formatters available in the shell
   - ruff

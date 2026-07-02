@@ -46,11 +46,11 @@ class TestRenderFunction:
 
             # Test None URL
             with pytest.raises(ValueError, match="URL must be a non-empty string"):
-                render(None)
+                render(None)  # ty:ignore[invalid-argument-type]
 
             # Test non-string URL
             with pytest.raises(ValueError, match="URL must be a non-empty string"):
-                render(123)
+                render(123)  # ty:ignore[invalid-argument-type]
 
             # Test URL without http/https/file prefix
             with pytest.raises(ValueError, match="URL must start with"):
