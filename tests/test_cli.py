@@ -3,7 +3,13 @@
 import pytest
 from unittest.mock import patch, mock_open
 from quack.cli import main, _print_text_results
-from quack.core import SearchError, NoResultsError, RequestError, FetchError
+from quack.core import (
+    FetchRequestError,
+    FetchError,
+    NoResultsError,
+    SearchError,
+    SearchRequestError,
+)
 import sys
 
 
@@ -101,12 +107,12 @@ class TestCLIErrorHandling:
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
-        assert "No results found: No results found for query: test" in captured.err
+        assert captured.err == "NoResultsError: No results found for query: test\n"
 
     @patch("quack.cli.search")
     def test_handle_request_error(self, mock_search, capsys):
         """Test handling of RequestError."""
-        mock_search.side_effect = RequestError("Connection failed")
+        mock_search.side_effect = SearchRequestError("Connection failed")
 
         test_args = ["search", "test"]
         with patch.object(sys, "argv", ["quack"] + test_args):
@@ -115,7 +121,7 @@ class TestCLIErrorHandling:
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
-        assert "Request failed: Connection failed" in captured.err
+        assert captured.err == "SearchRequestError: Connection failed\n"
 
     @patch("quack.cli.search")
     def test_handle_generic_search_error(self, mock_search, capsys):
@@ -129,7 +135,7 @@ class TestCLIErrorHandling:
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
-        assert "Search error: Generic search error" in captured.err
+        assert captured.err == "SearchError: Generic search error\n"
 
     @patch("quack.cli.search")
     def test_handle_unexpected_error(self, mock_search, capsys):
@@ -204,7 +210,7 @@ class TestCLIHelpAndVersion:
 
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
-        assert "0.2.1" in captured.out
+        assert "0.3.0" in captured.out
 
     def test_help_flag(self, capsys):
         """Test help flag."""
@@ -301,12 +307,12 @@ class TestCLIFetchFunctionality:
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
-        assert "Fetch error: Connection failed" in captured.err
+        assert captured.err == "FetchError: Connection failed\n"
 
     @patch("quack.cli.fetch")
     def test_fetch_handle_request_error(self, mock_fetch, capsys):
         """Test handling of RequestError in fetch."""
-        mock_fetch.side_effect = RequestError("Request timeout")
+        mock_fetch.side_effect = FetchRequestError("Request timeout")
 
         test_args = ["fetch", "https://example.com"]
         with patch.object(sys, "argv", ["quack"] + test_args):
@@ -315,4 +321,4 @@ class TestCLIFetchFunctionality:
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
-        assert "Request failed: Request timeout" in captured.err
+        assert captured.err == "FetchRequestError: Request timeout\n"

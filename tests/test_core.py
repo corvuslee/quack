@@ -1,14 +1,19 @@
 """Unit tests for core search functionality."""
 
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+import primp
+
 from quack.core import (
-    search,
-    fetch,
-    RequestError,
-    FetchError,
-    _extract_clean_url,
+    ChallengeError,
+    FetchRequestError,
+    NoResultsError,
+    SearchRequestError,
     _clean_result,
+    _extract_clean_url,
+    fetch,
+    search,
 )
 
 
@@ -165,11 +170,15 @@ class TestSearchErrorHandling:
     def test_request_failure_after_retries(self, mock_client):
         """Test that RequestError is raised after max retries."""
         mock_browser = MagicMock()
-        mock_browser.get.side_effect = Exception("Connection error")
+        mock_browser.get.side_effect = primp.ConnectError("Connection error")
         mock_client.return_value = mock_browser
 
-        with pytest.raises(RequestError, match="Search failed after 3 retries"):
+        with pytest.raises(
+            SearchRequestError, match="Search failed after 3 retries"
+        ) as exc_info:
             search("test", max_retries=3)
+
+        assert isinstance(exc_info.value.__cause__, primp.ConnectError)
 
     @patch("quack.core.primp.Client")
     def test_no_results_found(self, mock_client):
@@ -182,10 +191,48 @@ class TestSearchErrorHandling:
         mock_browser.get.return_value = mock_response
         mock_client.return_value = mock_browser
 
-        # The NoResultsError gets caught by the retry logic and re-raised as RequestError
-        # So we need to catch RequestError instead
-        with pytest.raises(RequestError, match="Search failed after 3 retries"):
+        with pytest.raises(
+            NoResultsError, match="No search results found for query: test"
+        ):
             search("test")
+
+
+class TestSearchChallengeDetection:
+    """Test search-engine bot challenge detection."""
+
+    @pytest.mark.parametrize(
+        "response",
+        [
+            MagicMock(status_code=202, text="", url=""),
+            MagicMock(
+                status_code=200, text='<form action="/html/?cc=botnet"></form>', url=""
+            ),
+            MagicMock(
+                status_code=200, text='<div class="challenge-form"></div>', url=""
+            ),
+            MagicMock(
+                status_code=200, text='<script src="/anomaly.js"></script>', url=""
+            ),
+            MagicMock(status_code=200, text="", url="https://example.com/anomaly.js"),
+        ],
+    )
+    @patch("quack.core.primp.Client")
+    @patch("quack.core.time.sleep")
+    def test_challenge_signal_fails_fast(self, mock_sleep, mock_client, response):
+        """Test any supported challenge signal raises immediately."""
+        mock_browser = MagicMock()
+        response.raise_for_status.return_value = None
+        mock_browser.get.return_value = response
+        mock_client.return_value = mock_browser
+
+        with pytest.raises(
+            ChallengeError,
+            match="The search engine requires a bot challenge to continue this search.",
+        ):
+            search("test", max_retries=3)
+
+        mock_browser.get.assert_called_once()
+        mock_sleep.assert_not_called()
 
 
 class TestSearchRetryLogic:
@@ -200,7 +247,7 @@ class TestSearchRetryLogic:
 
         # First call fails, second succeeds with proper HTML structure
         mock_browser.get.side_effect = [
-            Exception("Connection error"),
+            primp.ConnectError("Connection error"),
             MagicMock(
                 text="""<html><div class="result web-result"><a class="result__a" href="https://example.com">Example</a><a class="result__snippet">Test description</a></div></html>""",
                 raise_for_status=MagicMock(),
@@ -293,7 +340,7 @@ class TestFetchFunction:
 
         # First call fails, second succeeds
         mock_browser.get.side_effect = [
-            Exception("Connection error"),
+            primp.ConnectError("Connection error"),
             MagicMock(text="<html>Success</html>", raise_for_status=MagicMock()),
         ]
         mock_client.return_value = mock_browser
@@ -314,7 +361,7 @@ class TestFetchFunction:
         # Mock browser that fails first time, succeeds second time
         mock_browser = MagicMock()
         mock_browser.get.side_effect = [
-            Exception("Connection error"),
+            primp.ConnectError("Connection error"),
             MagicMock(text="<html>Success</html>", raise_for_status=MagicMock()),
         ]
         mock_client.return_value = mock_browser
@@ -327,14 +374,31 @@ class TestFetchFunction:
         assert content == "Success\n"
 
     @patch("quack.core.primp.Client")
+    def test_fetch_unexpected_error_propagates(self, mock_client):
+        """Test that unexpected fetch errors are not wrapped."""
+        mock_browser = MagicMock()
+        error = ValueError("invalid response")
+        mock_browser.get.side_effect = error
+        mock_client.return_value = mock_browser
+
+        with pytest.raises(ValueError, match="invalid response") as exc_info:
+            fetch("https://example.com", max_retries=2)
+
+        assert exc_info.value is error
+
+    @patch("quack.core.primp.Client")
     def test_fetch_failure_after_retries(self, mock_client):
         """Test that FetchError is raised after max retries."""
         mock_browser = MagicMock()
-        mock_browser.get.side_effect = Exception("Connection error")
+        mock_browser.get.side_effect = primp.ConnectError("Connection error")
         mock_client.return_value = mock_browser
 
-        with pytest.raises(FetchError, match="Fetch failed after 2 retries"):
+        with pytest.raises(
+            FetchRequestError, match="Fetch failed after 2 retries"
+        ) as exc_info:
             fetch("https://example.com", max_retries=2)
+
+        assert isinstance(exc_info.value.__cause__, primp.ConnectError)
 
         # Should have been called 3 times (initial + 2 retries)
         assert mock_browser.get.call_count == 3
@@ -344,9 +408,11 @@ class TestFetchFunction:
         """Test handling of HTTP errors."""
         mock_browser = MagicMock()
         mock_response = MagicMock()
-        mock_response.raise_for_status.side_effect = Exception("404 Not Found")
+        mock_response.raise_for_status.side_effect = primp.StatusError("404 Not Found")
         mock_browser.get.return_value = mock_response
         mock_client.return_value = mock_browser
 
-        with pytest.raises(FetchError, match="Fetch failed after 0 retries"):
+        with pytest.raises(
+            FetchRequestError, match="Fetch request failed: 404 Not Found"
+        ):
             fetch("https://example.com", max_retries=0)
