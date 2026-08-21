@@ -5,17 +5,20 @@ import json
 import sys
 from typing import List, Dict
 
-from .core import search, fetch, SearchError, NoResultsError, RequestError, FetchError
+from .core import (
+    LibraryError,
+    fetch,
+    search,
+)
 
 # Optional import for render command
 try:
-    from .render import render, RenderError
+    from .render import render
 
     RENDER_AVAILABLE = True
 except ImportError:
     RENDER_AVAILABLE = False
     render = None  # type: ignore
-    RenderError = Exception  # type: ignore
 
 # Import version directly to avoid circular import
 from importlib.metadata import version as get_version
@@ -143,20 +146,8 @@ Examples:
     except ValueError as e:
         print(f"Invalid input: {str(e)}", file=sys.stderr)
         sys.exit(1)
-    except NoResultsError as e:
-        print(f"No results found: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-    except RequestError as e:
-        print(f"Request failed: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-    except FetchError as e:
-        print(f"Fetch error: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-    except RenderError as e:
-        print(f"Render error: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-    except SearchError as e:
-        print(f"Search error: {str(e)}", file=sys.stderr)
+    except LibraryError as e:
+        print(f"{type(e).__name__}: {e}", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
         print(f"Unexpected error: {str(e)}", file=sys.stderr)

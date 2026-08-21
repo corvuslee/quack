@@ -1,9 +1,9 @@
 """Render webpage content using SeleniumBase UC Mode for JavaScript execution."""
 
-from .core import _html_to_markdown
+from .core import LibraryError, _html_to_markdown
 
 
-class RenderError(Exception):
+class RenderError(LibraryError):
     """Exception raised when render request fails."""
 
     pass

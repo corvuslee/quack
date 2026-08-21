@@ -10,28 +10,51 @@ import primp
 from selectolax.parser import HTMLParser
 
 
-class SearchError(Exception):
-    """Base exception for search-related errors."""
+class LibraryError(Exception):
+    """Base exception for library errors."""
 
-    pass
+
+class SearchError(LibraryError):
+    """Base exception for search-related errors."""
 
 
 class NoResultsError(SearchError):
     """Exception raised when no search results are found."""
 
-    pass
+
+class ChallengeError(SearchError):
+    """Exception raised when the search engine presents a bot challenge."""
 
 
-class RequestError(SearchError):
-    """Exception raised when search request fails."""
-
-    pass
+class SearchRequestError(SearchError):
+    """Exception raised when a search request fails."""
 
 
-class FetchError(SearchError):
-    """Exception raised when fetch request fails."""
+class FetchError(LibraryError):
+    """Base exception for fetch-related errors."""
 
-    pass
+
+class FetchRequestError(FetchError):
+    """Exception raised when a fetch request fails."""
+
+
+def _is_challenge_response(response: object) -> bool:
+    """Return whether a response contains a bot challenge signal."""
+    status_code = getattr(response, "status_code", None)
+    if status_code == 202:
+        return True
+
+    body = str(getattr(response, "text", ""))
+    response_url = str(getattr(response, "url", ""))
+    content = f"{body} {response_url}".lower()
+    if "anomaly.js" in content or "challenge-form" in content:
+        return True
+
+    document = HTMLParser(body)
+    return any(
+        "cc=botnet" in str(form.attributes.get("action", "")).lower()
+        for form in document.css("form")
+    )
 
 
 def _create_browser_client():
@@ -59,8 +82,9 @@ def search(
         List of dictionaries containing 'title', 'href', and 'body' for each result
 
     Raises:
-        ValueError: If query is invalid or max_results is invalid (must be 1-10)
-        RequestError: If search request fails after retries
+        ValueError: If query, max_results, or max_retries is invalid
+        ChallengeError: If the search engine presents a bot challenge
+        SearchRequestError: If the search request fails
         NoResultsError: If no search results are found
     """
     # Validate inputs
@@ -92,6 +116,15 @@ def search(
         try:
             # Fetch search results with browser impersonation
             response = browser.get(search_url, timeout=timeout)
+            if _is_challenge_response(response):
+                raise ChallengeError(
+                    "The search engine requires a bot challenge to continue this search."
+                )
+            status_code = getattr(response, "status_code", None)
+            if isinstance(status_code, int) and status_code >= 400:
+                raise SearchRequestError(
+                    f"Search request failed with HTTP status {status_code}"
+                )
             response.raise_for_status()
 
             # Parse HTML content
@@ -137,18 +170,22 @@ def search(
 
             return results
 
-        except Exception as e:
+        except ChallengeError:
+            raise
+        except (primp.ConnectError, primp.TimeoutError) as error:
             if attempt < max_retries:
-                # Exponential backoff: 1s, 2s, 4s capped at 10s
                 wait_time = min((2**attempt) * 1.0, 10.0)
                 time.sleep(wait_time)
                 continue
-            else:
-                raise RequestError(
-                    f"Search failed after {max_retries} retries: {str(e)}"
-                )
+            raise SearchRequestError(
+                f"Search failed after {max_retries} retries: {error}"
+            ) from error
+        except primp.StatusError as error:
+            raise SearchRequestError(f"Search request failed: {error}") from error
+        except NoResultsError:
+            raise
 
-    raise RequestError("Search failed: unreachable")
+    raise SearchRequestError("Search operation ended unexpectedly")
 
 
 def _extract_clean_url(duckduckgo_url: str) -> str:
@@ -245,9 +282,8 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
         Webpage content as Markdown string
 
     Raises:
-        ValueError: If URL is invalid
-        RequestError: If fetch request fails after retries
-        FetchError: If content cannot be retrieved
+        ValueError: If URL or max_retries is invalid
+        FetchRequestError: If the fetch request or content conversion fails
     """
     # Validate URL
     if not url or not isinstance(url, str):
@@ -275,13 +311,15 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
 
             return markdown_content
 
-        except Exception as e:
+        except (primp.ConnectError, primp.TimeoutError) as error:
             if attempt < max_retries:
-                # Exponential backoff: 1s, 2s, 4s capped at 10s
                 wait_time = min((2**attempt) * 1.0, 10.0)
                 time.sleep(wait_time)
                 continue
-            else:
-                raise FetchError(f"Fetch failed after {max_retries} retries: {str(e)}")
+            raise FetchRequestError(
+                f"Fetch failed after {max_retries} retries: {error}"
+            ) from error
+        except primp.StatusError as error:
+            raise FetchRequestError(f"Fetch request failed: {error}") from error
 
-    raise FetchError("Fetch failed: unreachable")
+    raise FetchRequestError("Fetch operation ended unexpectedly")

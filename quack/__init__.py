@@ -1,6 +1,16 @@
 """Quack - DuckDuckGo search with browser impersonation."""
 
-from .core import search, fetch, SearchError, NoResultsError, RequestError, FetchError
+from .core import (
+    ChallengeError,
+    FetchError,
+    FetchRequestError,
+    NoResultsError,
+    LibraryError,
+    SearchError,
+    SearchRequestError,
+    fetch,
+    search,
+)
 from .cli import main
 from .utils import validate_query, clean_query, filter_results
 
@@ -12,15 +22,18 @@ try:
 except ImportError:
     _render_available = False
 
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 __all__ = [
     "search",
     "fetch",
     "main",
+    "LibraryError",
     "SearchError",
     "NoResultsError",
-    "RequestError",
+    "ChallengeError",
+    "SearchRequestError",
     "FetchError",
+    "FetchRequestError",
     "validate_query",
     "clean_query",
     "filter_results",
