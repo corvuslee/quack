@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4d98c13d9f6284f2b8c7d7b03f3eb675eae89cc2fccf7a3f5f7be6d6c47f30c7",
+  "claims": [
+    {
+      "id": "claim_585989e22b60432e80fcc7a6e26ef1be",
+      "statement": "The installed package has a lightweight core dependency set (`html2text`, `primp`, and `selectolax`) and registers the `quack` console command at `quack.cli:main`; JavaScript rendering is isolated in the optional `render` extra, which depends on SeleniumBase.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L1-L31",
+          "version": "repo-lines-v1:sha256:f71739b78e82c1d17cbb2dc45dd24a8acf66d06991c86eaef4a5d925209a384e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmE4MWMzODM2ZWRlZjJkMGJhMTFkMjM1M2ZiNmRhYmM3NzcxNTBhN2NhODNlYTBkOWU5YTcwMzEzZmVhYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5MDViZGVkMDY0NDAxOTgyODQ5MGIxZDU2YzkwNmE0OGE5OGMyMDNiZTE2OTAzYjRmZjUyMDJiOTU0ZmI2YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2c465e8ada594267b33e758ca328a4fa",
+      "statement": "`quack` is the package façade: it re-exports search/fetch, `main`, the library error types, and query/result helpers through `__all__`; `render` and `RenderError` are added to that export list only when importing `.render` succeeds.",
+      "evidence": [
+        {
+          "resource": "repo://quack/__init__.py#L3-L44",
+          "version": "repo-lines-v1:sha256:4f8b4a9c216cd8bffc733319f48c9e45c5138b41ec2761e34578e756022e5cc8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjNmUxMzQ4OWFiZWVhNjhiZjc1ODk2Mjg4Mjg2NWJiMTQwNDVhYzhlNzA0NWFhZjRjNDU0NzNhM2MxNWMwODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZmY4ZGM1NjE1NjhmNTA5NzVmZDMwYmE5ODExNWU4NGRiYTUwNWVjMWYzNWQxNDY1ZTdhNjZjZDI1MDZmM2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhkODlhMzQwOTQ1Y2RjNjk1NDQ2ZjkyZjg5Zjg4MTE4MGUwMGMxYTBiNDliNjUwZmM1MmU5MmZmZjNjMjg4YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_357a4aa5d54f4737bfc64e0f387d887a",
+      "statement": "Render export/import success does not prove SeleniumBase is installed: `render()` imports SeleniumBase lazily and raises `RenderError` with installation guidance if that import fails, while the CLI independently performs its own guarded render import and availability check before dispatching the render command.",
+      "evidence": [
+        {
+          "resource": "repo://quack/cli.py#L125-L144",
+          "version": "repo-lines-v1:sha256:449f32619ac14dc9ce6c342da2c76292b39c1dd1992e77ecf9f18a905086b5f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4MzdmNmMxYWEwZWEzM2I1MjY1ZWZkMGRlNmQ2NWRkMTkzYWUyMmNlNzBkZjRlMGEzYjUwNjJhNGZmNzUwZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhMDRiMDJlMWU1MzIzNGJlNjkwMTlkMTI3NDQzOTVjOTE1MTMxZGMxYTRkYTE5ZmI2NGJlNGRhY2RmYjY4MDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMwYmZlNWQ5MDczOWYxZGJmYjFiZWNmNTA5ZDkyNDE4ZDU3YWRiMWZkZjdmMjA1ZTNlMTA0YjFhMjM0MzJiYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjMmE2ZTNhOGVhZTdiYmU0MzMzYzliYmQ1YzljZDUzMjgxNGIyZGI2NWNiNzJhMzAwYTRhOGMzZDQwNTcxZmEifQ"
+        },
+        {
+          "resource": "repo://quack/cli.py#L14-L21",
+          "version": "repo-lines-v1:sha256:78ff984158aadb5d3d847f7fcbfd43f935586a7f99d360292801b7fb980c38f5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzJkOGIyMTY2MmY1MWQzMGE2OThmYjg0ZDY3YzA4ZjFkODNlOGUyODE3YjViNWU4ZjFiNWIyMzQ5Mjc4NWRkYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjI3MmQ5N2JmNjYwM2FlYTYxZDk5NTI1OTg1NjUxYTc2MjMxMWNlNmRjM2YzYjVjM2YzYzg5YWUwNDZkY2ExOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTc4MGM0YWQ0ZjdiYTY3N2QzNTc1Mjk2NmM0ZWQ1ZGNhZDM1NDhlNTE2MzQ2YTUxMTExNzZiOTFmYWIzNzUzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzk1MjZiM2NkZjE1ZWUwNDBjNjg5ZDExNzg5NWIyODhmNWI0MDA0ZDllN2ZkNGRjNTE3MGRkNzI3N2ViNzQ4ZCJ9"
+        },
+        {
+          "resource": "repo://quack/render.py#L33-L51",
+          "version": "repo-lines-v1:sha256:d22a9f894517f49367176ff96e82c7736408190728d3cf65955967e773e38349:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlNzFhZWRiYjg1YmVlNTA2ODFjYzVjZGUyNzU2ODUzMmQ2NDg4OGQ4MDFhYTE3Yjc0NjA3OGQ0MGNjMzE3NWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGVkNDQ4NmY2Mjk2NjA2MDM4ZDlhOTZmOWM1OGQzMzBlM2NhNDdiYTllOGY4OTI5MWUzM2FiZDIwMzBmZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjZDk0NjFlZWRlMTFkMzgxOGIzZTBiNzM0ZmVmNzNlYTExZWM2NjI3NmVlMzIwNTY3ZmVmZTM2YzRjNTZiZGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_db98c31b92c442a481928f4774d374a5",
+      "statement": "Search and fetch share a fresh `primp` browser-client factory configured to impersonate Safari on macOS with HTTP/2-only requests; this transport policy is separate from the SeleniumBase rendering path.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L103-L119",
+          "version": "repo-lines-v1:sha256:0df047c330f1af96ae08aca8c2239d203005cc1fbc4db974a61daefd21946203:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNjFkODEwZWE3NGUwNmU4ZjkzMjllMTM1MDFhOTRlMWFhNjc3ODUyZTFhYzYzNGI0Mzk3ZDlmMWUwNDVkY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NDcyZjI0ZjQ0MGFhZWUwZDgxNzVkOTYzYjkzMzQ5YTg2ZTJmMmY2Y2FjM2I2ODIwYzM3M2U3ZTNmZjRkOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjczNWQwYzk4NmZmZTZlYzk5OGEwYjUzMTMwMzAyNWQ4YTcyMDczNzNlZDg4NDY1NzAwNmVkOTVhYzYxMTcyZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkZGU5ZmMwNzgyOTU4NDNkNjg0ZTdlODE5ZTY0MzZiMTUyODI0NzNkYjE1ZTMyNGZmZmRkMjJkNWVjNDk2ZjkifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L299-L305",
+          "version": "repo-lines-v1:sha256:5012608d06de0564cf6ec2fdf08152faf36e2309c192dd11d64dcaaea58f07c5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODI2MWQ4MTBlYTc0ZTA2ZThmOTMyOWUxMzUwMWE5NGUxYWE2Nzc4NTJlMWFjNjM0YjQzOTdkOWYxZTA0NWRjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI3ZWMzYmFmNzg3YWRmYjFiYmU0ZmMzODkzMThhZjUzZGEzYjRjODEzZWQ0YWEzYTI5ZTkyOGYzMjQyNTZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzM1ZDBjOTg2ZmZlNmVjOTk4YTBiNTMxMzAzMDI1ZDhhNzIwNzM3M2VkODg0NjU3MDA2ZWQ5NWFjNjExNzJkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGZhOTc5NTQ1ODc0ZWEzNmVjNGUwN2I1YTJhMTIzMmRlMzdmYzgzZDVjMTBhOWQyZTg1ZDliNzk3YzJjMDNhZiJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L60-L66",
+          "version": "repo-lines-v1:sha256:7862be779299840a54a64eee107aa90356b80d35996c2e6d4547c713a5c7728b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDAzMGNlZjk1NjZiNjk4MmQwOWU5MGRhZDJkOTQ3NDc0YTJiZWE5ZjkzYjVlYmEyNGUyODhiMjdjYmNlMWQ3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzg1MjVlNzczZTQxYTM1YTQxMjZlZjk5Yjg5NmQzMGMzODk5NDkzM2M3M2JhYWJlYjc3ZWQwNDBiZjViZWNmNSJ9"
+        },
+        {
+          "resource": "repo://quack/render.py#L53-L80",
+          "version": "repo-lines-v1:sha256:d6642e81ce5cf489ef6b157f69908b4b97f9215aa6d9705b12a3181b9e47ecdd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYTVjNjZlMTdiMTQ1Mzk3ODM0YjhjODU0ZGM0MTkzZTIxMjUxODBhODk5NmExNGMzMTg4MzMyNmIyZWZiY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlNWI2NjM0ZTg2ZmZjMjMzODBjOGJiMzBlN2NmYWMwZTYzMWUwMmJiMTViMDFkOTZmZDdlYmMxMThhZmQ0MGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhMDE3N2Y2YTIyZmI5MTMyMWJjYzYwNDQwM2JmMzZkYjExYTZhYmY1MWRlYzc5MmNjOWZkZDYxYzFmN2NmNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEwMWVmZWZiMmExMDBhYzg0Y2IzYTAwNmNiMjUxMzY1NzFmZmYyMWY5NjJiZGNjOTcyYTI2OTM2OTI2ZTQwYTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cb38dca8f4794ada9ce46755c000664f",
+      "statement": "For connection and timeout failures, `search()` and `fetch()` retry the initial request plus `max_retries` attempts using exponential backoff capped at ten seconds, then raise their operation-specific request error with the original error as cause; status errors are translated immediately.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L114-L188",
+          "version": "repo-lines-v1:sha256:a502e12fd13e7189c3a8cfe8427c3addd308d723c5a56f8bb8a2f9a820e2ff0b:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMDFkMjczOWU4ODA2YTFlYjIwNWU1MTU3MmNiZDdjMTFjMGI0MmE3MGQ0OTIyZjE4NDk1MmEwMGRkOWNiMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMGQxODc5Mzg3ZTBjODZjODE1ZGUzYzIzODYzZmY0Y2EzYmRhNGQwMDJlNzQ1MDUxYjRmMmQwZWNlODBmNmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMGZmOTk1N2MwMDIzZTI0NGZhYmI0OGI1NmU3MzllY2FhMTYwZTAwMjgyNTU5YTMxNDkxMTc4Mjc3ZWM1OGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViN2QxMTA5Y2U2ZTJlNTlhNTE5ZTc1NTExZTNkNDA4ZWJlNjMwMTVmOGI3YjAxOGMyZmMwZjMyM2ExMGU0OTQifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L301-L325",
+          "version": "repo-lines-v1:sha256:7fcb13c856f1b790a2e8f34dc8b3c2fdd816010690224056031c48f9cb8d20d3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMDFkMjczOWU4ODA2YTFlYjIwNWU1MTU3MmNiZDdjMTFjMGI0MmE3MGQ0OTIyZjE4NDk1MmEwMGRkOWNiMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwM2ZkMjk3YmU2YzllMGJmOGI5Y2ExYzVhMDU4M2ZiYjdiZmY2ZWYyMmE0MTRiOTNjNTIyMGNkNjgzYzI5M2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0NWM1YWVjNTBhNTY5OTdiZDdhNTVmNTE0YjIzZWRmMWRhMGZiZjVkN2E1MzI4NDE5NDcwYTFjMTdhZTQ5ZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L169-L181",
+          "version": "repo-lines-v1:sha256:b7b57b765a151638f4e5ab311c7a42bf278a1f7fdadd3231a6b94678d68b5c7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZWM1Mjk3NTQ0YWIxZmQzNTU4ZmQ3NzgzNzFjZmYwNTJhNGVjNzVhYzQ5YTIzNDcwOTI5NTRjMzczYTJjNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NTRkN2YzNjEzMzNhOTc5ZmJhZWZmY2Q5Y2I4ZWQ2NDNkNTQwZTMxYjQ4ZjkxOTdjNTk0OTBjMGMwNWMyNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0ZTkwMmRiMDBkYmRjN2QzNjA3YWNiYmQ0NDY4MmMxNzA5ZWE5MGY1OGU4ZjFiYmM0NTE0MDk4MWZjNTdhNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExYWI5NDk4NGZiZGRkNDM1N2E2ZGFiNGYxMzJiMWRlMGQ2ZmFhYTNmYzU0OGNmNzEyZmI2MDA2OWIyNGE0NDkifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L389-L404",
+          "version": "repo-lines-v1:sha256:ab80794c584f758cbf57982fb68db720d5934bb8407460ed289ce18297a9672c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZWM1Mjk3NTQ0YWIxZmQzNTU4ZmQ3NzgzNzFjZmYwNTJhNGVjNzVhYzQ5YTIzNDcwOTI5NTRjMzczYTJjNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyZWQ4ZmY3OWRlZGVmNzljZjEwMTc2YTU1OGY3YjQ4OWUyMWZiZjBiMTZkMTBlMjIyN2U0MzBkZTk4MTI3OTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwYzEzNjllYTRhMzE2ZTJmODA0MmQwN2RlZGY3NzdlMjQzMzg0MzcxOTE4NTA1NzdmMjYyZGY0MDkxYzEyZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmOGY3YzViZmNkMWY3MjJkOTE2MDE4ZDJhZmMwNWYxNmQyNmE1Y2M3YmU5YmQzM2U5YTgyZDIxMmNkNDA3MWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2024ac8c69a4d2ebf98e1dbbf623d3c",
+      "statement": "Search fails fast with `ChallengeError` when it sees supported bot-challenge signals, whereas an otherwise successful response with no cleaned results raises `NoResultsError`.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L119-L171",
+          "version": "repo-lines-v1:sha256:e04ab6ef363a5bd60975fb935300a43f5a2fce46427e05c6e2dfc455bf9f6b2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NDcyZjI0ZjQ0MGFhZWUwZDgxNzVkOTYzYjkzMzQ5YTg2ZTJmMmY2Y2FjM2I2ODIwYzM3M2U3ZTNmZjRkOWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0YzdkN2JhYzUzOGU3ODNiYzczMzQ2YTgzMTg3OTc4MWE4YTA4MTY0MTJlNDhjNzJjNDMxNjA2OWQ4ZWUwMTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiODY3MTQ3NWRiYzYxYjA3YWNiNTc2YjNiMzJjNzRjMzE5NWIwMGI0YTkyOGM4YWExNmM4NDhmYTdmYmI2NjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiMTU3MTJmY2JkMzhmNDAxZGFlNDk2NmZhZGUxMjQ3MjllOTFkZGVlZjdjYjRhYjM3YjI1ZmQyMDJhODg4MmQifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L41-L57",
+          "version": "repo-lines-v1:sha256:44d509d005b0c7a5e9d2d789b36457ed74819b405fdf14eb9491672d6b07d416:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMjZkYjU1OGZlYTg0MTMyNDAzNDdiZjUyYTNiYjA1YjUzYTE2NDViMzRhNzIzOTI5OWUzYWIyYzg3ZGE1N2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwYTU5NTZiZTQ4Y2IwYmY2ZjhiYTFiOGRhOWRjOTIwOGMxMWRiY2ZiYTExMTFlNmM3NzVkMmYyMjkxZjA1YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjYWE2YjkzZGRlYTEyNzVlN2VlODJkYzRkMjkwNWY1ZTNjMTc3Nzc3Y2RkY2FlNjllZjAwYTcyOGFjMzBjNjAifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L200-L235",
+          "version": "repo-lines-v1:sha256:9564d6b37cc39b67128a2eddca7f2507eed9007a76f54f18be45af5e59bd2e47:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmOTZmM2E1OTU5M2Y4ZWM4MDM1YzI0ODI4OThkMzNmZjZmNDUwODY2YTU4ZDhkMWZiM2I4MDViZTJjMGJhNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMjEyMGNhYWVhNjFiYmI3NjhlMDQyMDQ0YWVlMWJhMTJlOTVlOTQyN2MzZDE4OTg3MDQzMzRiYTA1ZGRjODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzNDRkZjA3YzNiNmYzMzUxYjQ0NzQ2MWU5ZDFmY2FlMDVhNmE4NDUwNDVmODEwYzNmYjY0NGUwNzlmNWVkMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVjZDM1M2ZkMDlhNjI2MjJmNDkxMDU0MzVlY2M5NTE0MTNiNjI2YmJhOTgwOTBlZWFiM2NkYzhlZjEwNTc0NjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c37ef904fb6e46318ecf3f387e9d0a48",
+      "statement": "`_html_to_markdown()` is the common conversion seam for fetched and browser-rendered HTML; it configures html2text for unwrapped lines while retaining links, images, and emphasis, so both paths return Markdown.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L247-L269",
+          "version": "repo-lines-v1:sha256:2eeaf7118bbce7cb93d0166fda98d5b99c11b70262273ff75ae2232b6c2a31ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0YzQ1Njk1MjA2NTViMzcwYmY3MWY3YWYyNWZjOTRmOGZiZWJmYjNhOWFkYzlkZjljNjIyZmEwOGFjODg5MzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlMzZhNzZkYjJmZGFkNDI4YjRiYzc1OWVhYjk5OWVmNzM0ZjdkZTg1NDRkZTE1ZjFkZmNmM2JhNWZkNjNiOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MWUwZDE5NjQ3ZGFjYmYyNzUxNGUxZGZhMmE5Y2RmNDI0NDI2NmU2N2NlMmExNzdkZWJiYjdlMDIxYmEzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0NzRmZTRiZDM2ZTFiNjFmYjdlODdiMzBjNjcyOTM3N2RiZWI2N2I4YWJjN2RmMzNkNDhkMmE4NTk1NzlmMzYifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L304-L312",
+          "version": "repo-lines-v1:sha256:f1e487f3e399342d606b5ea1c609294455d4ad681860d58600f4c3d51fb14a88:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjRmYWVkNzFlNzVhN2VhZDgxNDc4ZGMxY2M4Y2YyMDM0M2Y4NzY2ZjE4YmE0ZDEwMzI3NGNhYTVlM2FkMGM1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGU1YjY2MzRlODZmZmMyMzM4MGM4YmIzMGU3Y2ZhYzBlNjMxZTAyYmIxNWIwMWQ5NmZkN2ViYzExOGFmZDQwYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjIwMGI5YTQxYmI5YjBlNjEwOGJmMjg3ODRiOTg0NjMxMjcyYWJhMDk0MzQxZmM5MTJjM2Q3MzdlNmYzMmQzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMwMGQyNWE3ZmY5MTE2MTQwNTdkZjZhZTZjMGUwN2YwNTQ0OWEyOGQwYWU2YzQ0YjdmMmQ1ZGU3Zjc0OWU0YSJ9"
+        },
+        {
+          "resource": "repo://quack/render.py#L74-L80",
+          "version": "repo-lines-v1:sha256:d05837d00ef8b721bfb1d9ed62f43025d8b622bb2af81e00072e9b7063bd9d8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWE4NDMzNjU1MjlkOTU2MmFjZWIyYzg3ZGQ4M2Q0MDM2NTkxNDFlOTVlZThiNDhiYTIxOGU3MzFlZjE0MWM5YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGU1YjY2MzRlODZmZmMyMzM4MGM4YmIzMGU3Y2ZhYzBlNjMxZTAyYmIxNWIwMWQ5NmZkN2ViYzExOGFmZDQwYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTRkYTZhNjQ2NWZhZGU1NDVjMTM0OTg0MTI1M2UxMmQ3NGM5YjFjZDY1OTY3OWEzMTkzMDQ5NzMwYzk0ZGZlMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTAxZWZlZmIyYTEwMGFjODRjYjNhMDA2Y2IyNTEzNjU3MWZmZjIxZjk2MmJkY2M5NzJhMjY5MzY5MjZlNDBhMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_74b61c9673c14ceaa29c1c9c5d46d584",
+      "statement": "The CLI requires a search, fetch, or render subcommand; it formats search as JSON or numbered text, writes fetch/render content to stdout or an explicitly requested UTF-8 output file, and converts `ValueError`, `LibraryError`, and unexpected exceptions into stderr diagnostics followed by exit status 1.",
+      "evidence": [
+        {
+          "resource": "repo://quack/cli.py#L146-L164",
+          "version": "repo-lines-v1:sha256:24d9e706f47dc308714eb11f1c7f95f757739d35afd9409610584de1a342c426:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YjY0NmY5MDcwNTJhN2VmZjJmNWUwMDNjNzQ1ZjI4N2Y0NDI3N2E4M2Y3NDMxNmJhNzJmZTk1NTQ0YTZiM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwOTJmNGYxMzNjYjViNGE2YjVhNWZkNmZiZTY3ZWVmZmI0NGEwZTJhZDBkYWJlMmI3NjEzOGI4ZTQ5N2QzMDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMwYmZlNWQ5MDczOWYxZGJmYjFiZWNmNTA5ZDkyNDE4ZDU3YWRiMWZkZjdmMjA1ZTNlMTA0YjFhMjM0MzJiYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://quack/cli.py#L29-L144",
+          "version": "repo-lines-v1:sha256:c83d144a98e2ca9c0d15d1f3a7eb490de3007de7cca2f19d97d5f0237858d871:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjMmUzMTI1N2RjMGFlMWQ1OTMwMzdjMjgwYzlhZDUwODE5YjhhNmM4Y2Y3MjhiZTA3MTZkMDBhM2VlY2MwNGJiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI4YTA0YjAyZTFlNTMyMzRiZTY5MDE5ZDEyNzQ0Mzk1YzkxNTEzMWRjMWE0ZGExOWZiNjRiZTRkYWNkZmI2ODA5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2YWQ2NGE0YmU0NWMyMzA2Y2RiYWFhZDYxMzU3MTgyNmFmMDAyMjgwODkzNDYxYWU5NDgzYjk1OTc4ZGQzYjkzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0YzJhNmUzYThlYWU3YmJlNDMzM2M5YmJkNWM5Y2Q1MzI4MTRiMmRiNjVjYjcyYTMwMGE0YThjM2Q0MDU3MWZhIn0"
+        },
+        {
+          "resource": "repo://tests/test_cli.py#L231-L324",
+          "version": "repo-lines-v1:sha256:53d667c85820ce5f2a0550bf51209a64414aba9e346f5bc2f8b8987ee86f49ae:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MWU0ZjA4OWQxNjdlNjg5YmY2ZjljY2JjZDIzNjQyZjM3OTNhN2M3ZDgzNWY3YTJhYTQxMWZmYTNhNzA5NmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NjU5ZmYyOWYyYzlmM2M1NDcxNTIxYzQ3ZWZjM2ZhMzg5ZTI1ODM1YWZiNzMzMWI0NmMzMmM0ZTMyYTY4MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjExMjYzYzM4YTczZTg4NDc4YmRkMzk1MzFjOWMzYjkxYTYxMTkwOWFkOWM0NmNlMzU2MzEzZWYxOTliZTQ5MmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_cli.py#L84-L152",
+          "version": "repo-lines-v1:sha256:8bd047b1960b1d56fb8b2a561f73d24507114dab4fcc9c555cf5cf6a30418500:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmYWRlMmJiOTJhOGNkMGZjY2JiMGMyNDlkMjc3ZDFlYmQxYjg1YTRiZDcyZWIzZDQ1MjcwMmQzYWE3M2I1ZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5MGE3YWFjYmEzYjgzYWY3OTg4MTMyNmY5ODBlYTNhOWQ3MmUwMmJhNmE3YjYwMDhkNTgyMWVhNWNlMDA0Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0ZDJiMmMwMTEwODQ3M2NlODBiZGU0YjJkOGQyMDdjODVkOWFkNTg0MjdjZTQ4NWE4NWIzNTYwZTcwNDg1ZmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1NTczZmQ1NDhhNmE5NDgzOGFjNjMwNTJkOGIzNTA0MjQ3NDg5Njg0Yzg2MjlkMGE4YzI2MzNmZDM3NzQ1MTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf7c9e04e0044a3c95546a9264205c05",
+      "statement": "The optional renderer validates HTTP(S) or file URLs, runs SeleniumBase in a bounded UC-mode, headless, incognito session, waits for JavaScript, treats CAPTCHA clicking as best-effort, converts page source through the shared converter, and wraps other rendering failures in `RenderError`.",
+      "evidence": [
+        {
+          "resource": "repo://quack/render.py#L12-L83",
+          "version": "repo-lines-v1:sha256:aee72e255547bd976f3ce8d05ea489789c99f8e81a26b361ea701539a05752e4:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjNzRmMzcwZDA5OWMxOThhMGUyMDIyMDFiNzJlNDcyZGJhOWYxMDM4ODdiZGRkMmE0NTdjYThmMDRkZDJlM2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2ODMwNzA2ZTZlNGQ3ZTk4ZGJhYmZmOGE2YjgzNzNlNjgyMmM5MGM2MzkzNzM3OTRlY2YwNzhhZjk3NDgxOTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1NDEyNzMwOWZkZTJiZWUxOWQzODY1MWRkOWU5ZmJiZmQzM2E5MGM2Yjc1ODk4NjY4MzM3N2U1YmNjNzUyOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_render.py#L16-L59",
+          "version": "repo-lines-v1:sha256:0c59ba75e5c78deace408c9d02b614f2040a1f1cc03a2f3556433c7dfb359fa6:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNTQyYTljODUyZjY3ZmI3NWM5NDhlZmFjNWYwODJmYjA5NGI2OWVmZDM3ZDEyYzViYjhjMjRjNjRlM2JlMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNjEyNDQ0MGRlMGE5MTU2ZjlkMjk0YzNkYmNiMDA5NGIxZDhkZGQ0ODRmZjJkYTRmNTU0NWFhMDkyYjBlZTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhYjU2YmIyMzA3MGZkZDg3ZTc2YTllYWMzYmM1OGM5MDRiZWQ3OGU3ZjFlOTVmN2MxMjk0NTY5ODgwZmY4ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhOTY0MmVmY2Y3NGUyOTExZjIwOGU4NmEzMjU1NjMyNzJiNjU4MDRlY2UzZTNhNGJlNDc5NzcxMTIxMTY2ZDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e37bb95762d49acbe25d5c6db754479",
+      "statement": "The public error hierarchy distinguishes search, fetch, and render failures under `LibraryError`, while argument validation in the operations raises `ValueError`.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L13-L38",
+          "version": "repo-lines-v1:sha256:f972639d73a99266617100b6994eaff4c52f1ec19cacd09aedc36b4f39a1a20f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZDUxODlkMjQ3ZTBhYzE0NDFkZDg1YTg1ZDNhZjI1N2VhZDE1Y2NkNzc0MTZmODJlYzczODk4M2I2MmRjOGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliM2YzZmVmNWM4NjczMzhmYzFhYjU5YThmNTNmZTcyNzhhYjJiZGY4ZDhhODcwYmViNGE0ZTNjN2IwY2Y4OWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmZmUzM2EzMTc4MzQyMjJjODdjYjE3YTAwOGJmNjhiYzliMzY2NTE1ZGQzMzI1NTE1MDFjYmFhOTcwYTA1NjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzNzlkYTkwNGJkNjZkNmZjNTQzYzNhZmE0NjYyODkzYjQzNTQzYTMwZGVkOWMxZGU1MDM1MTIwZDNhMmM0NDcifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L284-L297",
+          "version": "repo-lines-v1:sha256:78ee07592b7e5bca303a9ac18c3beb9568b30d3b8b8554e774c31baba65de8b6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMjliYTQ1YzkzNzU4MDlkMmUzMjg3ODgzMTJlMGQ5YzM2MmNkZmQyNzNhNjVlOWMzNWVjNTUyY2M1YTFjNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDFmYzIwNmYwOGQ0YjU1M2UxYjY3MzQ4MjhkOWM5MjliNGQ3ZDlhNzQzYjMzNzdmZGQyYWQ2YjZkNWZlOGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3YWFlOWMwYjZjNTY2NWQ5MzA0ODFhY2MwMTAyYjc3ZWU4YWQ1ODg1MjhkNDc1NDM4NmI5NWJhZGI0NGY0ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0NWM1YWVjNTBhNTY5OTdiZDdhNTVmNTE0YjIzZWRmMWRhMGZiZjVkN2E1MzI4NDE5NDcwYTFjMTdhZTQ5ZWEifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L90-L101",
+          "version": "repo-lines-v1:sha256:8ed35ab688aec8a15978051f81c0f6831ea7f20ca9d254523e5f6695341f4ae3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3ZWRhZjc3ZjQyMDc3OGQxOTA3MGU2NzhmYTY3MTM1YTc1MWVhMDljMzExNjZkYmMwMDc5ZmM2YzRiZDAxZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDFmYzIwNmYwOGQ0YjU1M2UxYjY3MzQ4MjhkOWM5MjliNGQ3ZDlhNzQzYjMzNzdmZGQyYWQ2YjZkNWZlOGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyYTVlNDBjNDAzZGI2MmVjNDk4YTVlYjVmMjBkODY5MzBjYzM5ZWJjODZiNTZjZWFkYmY1YTYzNGE0ZmFmOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0NWM1YWVjNTBhNTY5OTdiZDdhNTVmNTE0YjIzZWRmMWRhMGZiZjVkN2E1MzI4NDE5NDcwYTFjMTdhZTQ5ZWEifQ"
+        },
+        {
+          "resource": "repo://quack/render.py#L33-L43",
+          "version": "repo-lines-v1:sha256:09b8e4d6b9fb437c416b5d42f5ecaf0aac6065508ea62e8ba93e98c56ff37a40:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlNzFhZWRiYjg1YmVlNTA2ODFjYzVjZGUyNzU2ODUzMmQ2NDg4OGQ4MDFhYTE3Yjc0NjA3OGQ0MGNjMzE3NWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5NjQ3MzVjMzAzMWE2NTkxMmU4OGE4Yzc4MzczMjgwZjI3NjhhMmFiYjdmMTQwM2RiYWUwYWIwNDU5ODZjZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGVkNDQ4NmY2Mjk2NjA2MDM4ZDlhOTZmOWM1OGQzMzBlM2NhNDdiYTllOGY4OTI5MWUzM2FiZDIwMzBmZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2NmFkZWU0ZWI2ZjEyY2QxOGYyZTE4MjZlMDE3YzM0OTQwZWQ0ZTVkODcxZmEwODBjZGU3NDdiOWVlYWMwZmUifQ"
+        },
+        {
+          "resource": "repo://quack/render.py#L6-L9",
+          "version": "repo-lines-v1:sha256:b035cc280985af677b931f92780b660864ca274aea6aaf2f0c0a82d75c41df85:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQwMWQzOWQ2ZDM0MWMwMDUzZTIyOGUyNGI1MjhhOTQ3ZmI1NzkzZDYzZGEwODRiOWViODQzMTdhMGMxYzZiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQ0NWUxN2FkZWQzMDk3NDVmZmRhMzI5ZmNkNjU4NjJkNTI5NmM0ZWQ3YjBmZWNlYjMzMDQ3NWY2ZTI3NGM2MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTU3ZDhhNWQ3ZGE3MTIxYjFjMjM2OTNlMjI2NWYxNzc4YzZjNDEyYWUwZWQ5MmE3NzQ2Mjc3NjFjYmRiNTk0YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmZmNjQyMWUzYWQ2NzM4MjJjMTM5ZjlmNTMwODlhMGMwMzFmMTFjYWE2YjkxYWFkNTQ4ODI0MTY1MGZjNGQzZiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-16T14:26:49.981Z"
+  }
+}

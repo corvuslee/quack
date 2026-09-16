@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/public-surface.md": {
+      "pageVersion": "sha256:4d98c13d9f6284f2b8c7d7b03f3eb675eae89cc2fccf7a3f5f7be6d6c47f30c7",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    },
+    "/openwiki/concepts/failure-and-output-contracts.md": {
+      "pageVersion": "sha256:20bdc51d428bfd34742f109fed462983286db02211b21e60a43e022cfd46595c",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:4d76274c33121a4d268b386a8b0e883c197224b8f7f1d9527aca554d8a8f2a8b",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    },
+    "/openwiki/testing/verification-and-delivery.md": {
+      "pageVersion": "sha256:f8b602549bda0d0a1e5fc3f8fbef9bfae23cc647c3c65c0203ffac4e8e92e8cf",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    },
+    "/openwiki/workflows/content-retrieval.md": {
+      "pageVersion": "sha256:0775174ad22bcb796314bf4f4d89a5cb73b5adba4aeec2899adbffbbf817f4c3",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    },
+    "/openwiki/workflows/search-pipeline.md": {
+      "pageVersion": "sha256:4b7f9172597c1a4a500b0905884874587b76e4427d1cc038e64f0d16a17150dd",
+      "completedBy": "openwiki/0.5.2",
+      "completedRunId": "60380e28-1726-4cd7-b024-17541be95ac0",
+      "gitHead": "de4dba9008b3d77ccfea6d97a370c54bb2905c6d",
+      "sourceFingerprint": "sha256:319fc26fccef020b001871de4102800b8299cf569397aa468a54b722782ec934"
+    }
+  }
+}
