@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4b7f9172597c1a4a500b0905884874587b76e4427d1cc038e64f0d16a17150dd",
+  "claims": [
+    {
+      "id": "claim_a73f8fbc44a0477182cfc7593c9e0cda",
+      "statement": "The public `search(query, max_results=10, timeout=30, max_retries=3)` workflow validates non-empty string queries, limits `max_results` to integers 1 through 10, and returns a non-empty list of normalized `title`, `href`, and `body` dictionaries or raises typed search errors.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L168-L171",
+          "version": "repo-lines-v1:sha256:93a6ac5f83eab02818bd1417c0343efa6204076ae4628bc759c35a7f07cd5976:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBmNTk4MjhjOWIxNTkwMDg2MWY4YjgxNzc0ZWQwNmRkNzA5OWNhYTJmMGExNmEwMjQyYWE2MTA4MGYwZmI3YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODRjN2Q3YmFjNTM4ZTc4M2JjNzMzNDZhODMxODc5NzgxYThhMDgxNjQxMmU0OGM3MmM0MzE2MDY5ZDhlZTAxOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjJhZGQ2YTNiNTBiNjJkZWZhMzM1MmNmNmU5Y2NhNTgxOTY0YmE3NjdiMjJlNzk2MzliYWVjMWZjNGQ4NGM2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmIxNTcxMmZjYmQzOGY0MDFkYWU0OTY2ZmFkZTEyNDcyOWU5MWRkZWVmN2NiNGFiMzdiMjVmZDIwMmE4ODgyZCJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L218-L244",
+          "version": "repo-lines-v1:sha256:9a90c97ccf21077f30b749f915d82c1e815183d7109251b65e698cb3a231dbf0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMGY1NTAwNDllMWFiMjZiZmVhZDU4MmY0YWUyNzI1MWE3ZGM4MTc3ZTA1MGQ0NTk1YjYxMGU3NWMwYzdkZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZjUzNDBiYmYwZjFjNTEzODQ2MjRiZGFjNzE3YWJlMmViMGYwNGNhMzRiMTZjZjU3YjJlYjc5ZWM5MTFjYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1NTU5Njc4ZGZiODhlZWYyODU4M2JlODlmZWZlOTA3YzNhM2VmNzZmNDk4NDBlZGIwMDQwNWViMDAyMDgzYjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjM2RmY2IxZDZiMWMxZDRiZDY1MjBiYmJiMzA4YWJjOGZiMmRlMjVlZDJjMzI4YWU0ZmRkMzI0OTBiNWI0MWIifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L69-L101",
+          "version": "repo-lines-v1:sha256:1078d8b439a9f97dc71aeba0a954c5958e24a374c040e95cd46dcc38a827e94e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxYmMwOWZkNjZhYWY5MzQ0ZGZlZWYwZDU2YTZlZjVkNmVlNGM3ZGYyODk2OWM1ZjE3MmIwYmVlY2ZkMjk4NDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDFmYzIwNmYwOGQ0YjU1M2UxYjY3MzQ4MjhkOWM5MjliNGQ3ZDlhNzQzYjMzNzdmZGQyYWQ2YjZkNWZlOGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0NWM1YWVjNTBhNTY5OTdiZDdhNTVmNTE0YjIzZWRmMWRhMGZiZjVkN2E1MzI4NDE5NDcwYTFjMTdhZTQ5ZWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c9f1a3bb7a984754838d3f949eb6cb28",
+      "statement": "`quack search` joins positional query tokens and delegates the limit and timeout to `search`; it emits indented Unicode-preserving JSON with `--json` or numbered text records, while CLI-dispatched validation and library failures are printed to stderr and exit with status 1.",
+      "evidence": [
+        {
+          "resource": "repo://quack/cli.py#L146-L164",
+          "version": "repo-lines-v1:sha256:24d9e706f47dc308714eb11f1c7f95f757739d35afd9409610584de1a342c426:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YjY0NmY5MDcwNTJhN2VmZjJmNWUwMDNjNzQ1ZjI4N2Y0NDI3N2E4M2Y3NDMxNmJhNzJmZTk1NTQ0YTZiM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwOTJmNGYxMzNjYjViNGE2YjVhNWZkNmZiZTY3ZWVmZmI0NGEwZTJhZDBkYWJlMmI3NjEzOGI4ZTQ5N2QzMDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMwYmZlNWQ5MDczOWYxZGJmYjFiZWNmNTA5ZDkyNDE4ZDU3YWRiMWZkZjdmMjA1ZTNlMTA0YjFhMjM0MzJiYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://quack/cli.py#L46-L64",
+          "version": "repo-lines-v1:sha256:c359fa3760a8785173bfe5cae836c5d8f73fa9e05062e2a318dbf38e2fcba6d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NGYxNDI2ZGY0NTViNmU4ZWM2MWE1ZmI4MTEzMGI0MmYwYzhhYmQ4NDFiMmRiODRiNTE0Y2QwNTUxYzY2MGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMGNhNmVhNmEzYzk0MTMwOGU1MGVkYzI1MmU0ODU0ZTUyMjY1ZTNjYWY5M2YyYzhmYTY3ZDlhZGM0NDIyZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjZDk0NDAxZmZmNmRkMGU5NmRjYzE4NTIxMGE2Mzg2NjQzNThlZDRhNzZhMmRlYjU1N2E1MTQ5MmZlMTJmNDMifQ"
+        },
+        {
+          "resource": "repo://quack/cli.py#L99-L111",
+          "version": "repo-lines-v1:sha256:f847d5dcd85df5d13f60f548f8ed1d0b8c1b071e13716e8e920f09d3f930de58:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYTVjNjZlMTdiMTQ1Mzk3ODM0YjhjODU0ZGM0MTkzZTIxMjUxODBhODk5NmExNGMzMTg4MzMyNmIyZWZiY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZmEwMmRhMGRiZWMzMjVjMzcwZGE5N2FlYTk3NzZlOTE1YzRhZGE4NjNhYTNkMzc3MTJkZjgwN2MwZWE4OWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxNGIwYWM5NTRiNzBhM2E4MjNjZDc5YjIzYzFkMjJjNGY5Yzg2OTBkYzczZDkyMDM5YjljOWQ2ZDA1OWE3ODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljMTExZGQwMDcyYzAyN2E3ZGVhYzE2ZTU1NTgxYWZkNDQ0MGY5NTUyYmE2ZmJiZGM4NGJjOGUzN2UwZjc2MWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_127470b2b43b4e459a944654a3bf2d6e",
+      "statement": "Each search creates a fresh `primp.Client` impersonating Safari on macOS with HTTP/2 only, then queries `https://html.duckduckgo.com/html/` using URL-encoded query, UK-English locale, and unrestricted date parameters.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L103-L118",
+          "version": "repo-lines-v1:sha256:6c18eb9e77d6b333e9d24ab775f7ed4b78d7f05561e4dcce32909deb5d95f4b5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNjFkODEwZWE3NGUwNmU4ZjkzMjllMTM1MDFhOTRlMWFhNjc3ODUyZTFhYzYzNGI0Mzk3ZDlmMWUwNDVkY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwNDgxMTZiNWI2NGZjZjVjZWRkYTAzY2FjOTQyYzQxZmM3MzMzNTJlOWVlZmFmMDc0N2ZkZjUyMDUyNzhjNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjczNWQwYzk4NmZmZTZlYzk5OGEwYjUzMTMwMzAyNWQ4YTcyMDczNzNlZDg4NDY1NzAwNmVkOTVhYzYxMTcyZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyNTZmOWFjYmE1M2RhZGIyYTAyZDFiNGMzNWQzOTEyMDFiNjZkYWFkZWFlNmNlN2EzZmI2NGRiODE0MmIxNWQifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L60-L66",
+          "version": "repo-lines-v1:sha256:7862be779299840a54a64eee107aa90356b80d35996c2e6d4547c713a5c7728b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDAzMGNlZjk1NjZiNjk4MmQwOWU5MGRhZDJkOTQ3NDc0YTJiZWE5ZjkzYjVlYmEyNGUyODhiMjdjYmNlMWQ3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzg1MjVlNzczZTQxYTM1YTQxMjZlZjk5Yjg5NmQzMGMzODk5NDkzM2M3M2JhYWJlYjc3ZWQwNDBiZjViZWNmNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c57780a158747b484ac60eeaddae987",
+      "statement": "Search detects a DuckDuckGo bot challenge from status 202, anomaly/challenge markers in response body or URL, or a form action containing `cc=botnet`, and raises `ChallengeError` without retrying.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L115-L122",
+          "version": "repo-lines-v1:sha256:444bd9c87d4af65ad797b7c877880221de402f3d429b17d92a53733531d2bf10:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQwYmE4ZDVlYmZmZThiYjQ3MWU5YjlkZjg5NzJjMzVlZjkxZmZmZTFkY2JkZjExMGI4MmY0OWY2NTRmYjdhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTEwMzQ4MWM1N2QwZjBkYzBmNzZjZDJjYzhiMzYwNGM0ZTgyOTZkYTQxMjJhZGQxOWU4MTc0NWRjN2UzMzFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjU1YjRjNTljNmYwNzE2YTEyODY0YWEyOTJmNjZmODIyMWMxZjU1MDhiODFhMmJiYzYxNTZjNjNhYmI1ODQ4ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmM3NjhhZGVlODlkZWYwYjBkODNlZDk3ZmQzZTM5MDdiYzQ1MzM4NjliOTk1ZDgxN2JiNmZlNDg2MzAzNWJmOSJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L173-L179",
+          "version": "repo-lines-v1:sha256:dc932426cefea81591d1e37132191ee742cfebbed5321438c8d32587a0711cef:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTlmODFmYWY1MTU3MTM0ODAyMmNiNjlmZGQ2YWMzYTFmYzU2ZmVhNDA1YzI2MmJhMGE3ZTkyZjJlYzUzM2U0MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQ4YTllOWMzMjUyODIwYzY1YTgxNjUyMGI4ZGI0OTMyMjgwODQ5ZWM4YzdkMmViNjI3MmFmZGZlYmUwNTljMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTA3NDhjYmRjYmVjZTQ2MDk1ZmEwNmQ0ZWY0ZmY1M2VmMGE4YjAwNGZkZWMyMGRmZjg4MWI5MWIxNjY0ZjlkZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjRhYjQ3YjMwOTM3M2E3MWZhMjMyNWE4YjhmMWQyNmFjYzcyY2RkZjU1YjBiYTQxY2ViMWRiNDQ4N2MzOWM4ZCJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L41-L57",
+          "version": "repo-lines-v1:sha256:44d509d005b0c7a5e9d2d789b36457ed74819b405fdf14eb9491672d6b07d416:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMjZkYjU1OGZlYTg0MTMyNDAzNDdiZjUyYTNiYjA1YjUzYTE2NDViMzRhNzIzOTI5OWUzYWIyYzg3ZGE1N2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwYTU5NTZiZTQ4Y2IwYmY2ZjhiYTFiOGRhOWRjOTIwOGMxMWRiY2ZiYTExMTFlNmM3NzVkMmYyMjkxZjA1YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjYWE2YjkzZGRlYTEyNzVlN2VlODJkYzRkMjkwNWY1ZTNjMTc3Nzc3Y2RkY2FlNjllZjAwYTcyOGFjMzBjNjAifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L200-L235",
+          "version": "repo-lines-v1:sha256:9564d6b37cc39b67128a2eddca7f2507eed9007a76f54f18be45af5e59bd2e47:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmOTZmM2E1OTU5M2Y4ZWM4MDM1YzI0ODI4OThkMzNmZjZmNDUwODY2YTU4ZDhkMWZiM2I4MDViZTJjMGJhNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMjEyMGNhYWVhNjFiYmI3NjhlMDQyMDQ0YWVlMWJhMTJlOTVlOTQyN2MzZDE4OTg3MDQzMzRiYTA1ZGRjODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzNDRkZjA3YzNiNmYzMzUxYjQ0NzQ2MWU5ZDFmY2FlMDVhNmE4NDUwNDVmODEwYzNmYjY0NGUwNzlmNWVkMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVjZDM1M2ZkMDlhNjI2MjJmNDkxMDU0MzVlY2M5NTE0MTNiNjI2YmJhOTgwOTBlZWFiM2NkYzhlZjEwNTc0NjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_43207a82cde94030a173fe5870070447",
+      "statement": "Only `primp.ConnectError` and `primp.TimeoutError` are retryable: search makes the initial request plus up to `max_retries` additional attempts, uses exponential backoff from one second capped at ten seconds, and wraps an exhausted transient failure as a chained `SearchRequestError`; status failures are translated immediately.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L114-L128",
+          "version": "repo-lines-v1:sha256:1b5cd7e4ab1ecfb38334556f14e6b75545b1099143c6a1ad22a61a5a82121452:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMDFkMjczOWU4ODA2YTFlYjIwNWU1MTU3MmNiZDdjMTFjMGI0MmE3MGQ0OTIyZjE4NDk1MmEwMGRkOWNiMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkMTYyM2VkMjAyNWU0NTVmODQ0ZDY5MmQyYTFiZDliMDkyMDRiYzJjMjRiMDhmYjBkMTBlYWI1MTQ2N2E3ZDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMGZmOTk1N2MwMDIzZTI0NGZhYmI0OGI1NmU3MzllY2FhMTYwZTAwMjgyNTU5YTMxNDkxMTc4Mjc3ZWM1OGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwMjZhMmQ0Mjg1ZjM3YWJkODkwZTJjNGQ5NWRkMzNjMzVmY2UwYWVmNmVmZDEwNTBlNjU2Yjk4YmRmNGYzYzcifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L173-L184",
+          "version": "repo-lines-v1:sha256:eed2f2a9ce06c8102a6afdaba115a4ffa08c2236704e0ff1a0211af13dc9c118:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5ZjgxZmFmNTE1NzEzNDgwMjJjYjY5ZmRkNmFjM2ExZmM1NmZlYTQwNWMyNjJiYTBhN2U5MmYyZWM1MzNlNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZDE0MjExNTc2YmI2ZTM1ZDE3MDQyNjk2MTVkMDg2ZDU1ZmYxNzhkOGJhY2ZmY2RkZTdhNWUzMDgzYWNmZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwNzQ4Y2JkY2JlY2U0NjA5NWZhMDZkNGVmNGZmNTNlZjBhOGIwMDRmZGVjMjBkZmY4ODFiOTFiMTY2NGY5ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViZDliMzhkOWVjNGM4YWZhM2VhMjVlN2FiMTgzZGQ2YTc3ZDc2NjVmMTRhNzY0Mzg0YmIwYTJhYTM3NDJjNWEifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L166-L181",
+          "version": "repo-lines-v1:sha256:4d99625b4b019f8ce49877093a0d5f2827363b2880a58c240f3e4edc45de4e45:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5Njc4YjQ3MzRiODhmNjRlMzZkYzdiODJlNjRmMDZlYjMyM2FhNmE2ZTU2OTIxZTJhMWY5N2Q2OTI4NzZhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NTRkN2YzNjEzMzNhOTc5ZmJhZWZmY2Q5Y2I4ZWQ2NDNkNTQwZTMxYjQ4ZjkxOTdjNTk0OTBjMGMwNWMyNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlMzY2OTk0OGM2Y2Q4Mzg0M2RlNzFmZWQ0NTJjM2I2OWZmZDQ1ZmI5YWI2YjY3ZGM0YWJjMDE1NGNlNTM2NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExYWI5NDk4NGZiZGRkNDM1N2E2ZGFiNGYxMzJiMWRlMGQ2ZmFhYTNmYzU0OGNmNzEyZmI2MDA2OWIyNGE0NDkifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L238-L274",
+          "version": "repo-lines-v1:sha256:932acbf049a169d94cfcb1441d5f6c3d3ec55c59dccba07d0248e76ca2fcef37:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxN2M5MjNmNzBhZTgxNGVhODgyMDJmYjY3NGU0OTkwM2NkZmUwY2I5NzcyMGJmMDlhMjk5MDkyMTA4NzBlYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2ZGJiMDkwYmU0ODRkODM1M2Y2OWI2MjYwZGE0MmIzNjYzMWRmNGNkNTQ4ZTc1MmY1MTk0MTNhYTM0MmE0N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5MTMyMmZmMTZhZTdiNDM2ZWI1YTU5ZTk3YmU0MWY4NDBjYzVlZTlmYzIxZjYxMTk4YTBhODNmMjlmOTliNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkODM4ZWNiNTA5NzcwNTQwOGZiMTI4NDk0MTMyOTZlMDQ1ZjhjZWU4NTllZjg4NDRmOTc4NDAwMThlNjI0N2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_358796af815c4fca8169f4c845f15a13",
+      "statement": "Search parses DuckDuckGo HTML by selecting `div.result.web-result`, extracts a title link using `a.result__a, a.result__url` and an optional `a.result__snippet`, processes only the first `max_results` containers, and skips individual container parsing failures.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L130-L166",
+          "version": "repo-lines-v1:sha256:b82fa2958d6a3c9a26a951ac9efd24dd7c5690d9e78c6dab365581e72f113179:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmZDRlZDg3ODNmNjMyMmZmMGYzNjM0OTg4NTc0MTk3ZjFkODRiNDhjNGJkMjc1ZDA0MWI2YjI4M2RiMmYxYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyNmU0MzY4ZjIxZjg4OTFjZWQyNGNmYWY3Y2EzYmY5OTg1YjNmNDY5ZDRhNjgyNTZlMTYwOWQ2NTZmMWE3OWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4YTlmMzUwMDhiYWQ4NjBlNDFjYjYzOWQ4ZWQ1ZWVjNjljMTY4ZjIyYWMyZDM4NjJiYzczNjE2YzVjOGMxNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhYjBmMjc0ZjYzYTJjNmE1ZDZiOThjYjUxZjIyZDE5NWVmNGNlNDE1ZTgyZWJmYzg4MWNlOTA3MGMxOTA0YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_85a5ea3ae9744846ab0824db2ad9b7f2",
+      "statement": "DuckDuckGo redirect hrefs containing `/link?` or `duckduckgo.com/l/` are cleaned through the URL-decoded `uddg` parameter; valid result records require title and href, normalize title/body whitespace, normalize non-HTTP(S) hrefs with an HTTPS prefix, and always return `title`, `href`, and `body`.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L139-L162",
+          "version": "repo-lines-v1:sha256:5e33d2ef769d08dffc7bc455c4d25f9255b028dc0d20b4d25c95a27042a52daa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmYzQyZjg0OTg4ZjRhMjNkZGIzZGRiMTQ4YzYyNmQ0NDJlZWMxNmZkYjUwYTQ0NThkMTJlOGVlZjVmNWFmY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwNTE0MGFlZWRkMTk1NmZhOTBkODQ2Mzk2ZDJhOGUzYmFlNmFjMWRjZDM2ZWFiOGIwMGFhMWZjNDk2MjdkMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyNDNmYjdiNjk2ZDI1M2QwYjdkNGJmODAxMTBiMjg5YzhlMzE3NWY4NDAwZDZlMmJmOTgyNTFjZGNiNDVkOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEzMjY0OWYxN2IzYWI2ZGZlNDk5MThmMGMyMjJkMTVkZDViOTgyZmNlZjM3OWE4NDhkNDIzYmZiNWY5OTQ0MTEifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L191-L207",
+          "version": "repo-lines-v1:sha256:98551f56536a7c7dd470f1604ba980c6284eb6a663ab7d584ccefdacf552c229:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2ZGRlNTkzM2YxYWExNmY1ZmFmZDA3MDY2Mjc2ODc2MTFiZTc3N2MwNzAzNzQ4ZDgzMmUyOGFjYjRiMDU3ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiNTE3YWY1YjMxNjU1NzUwZGM2OTVmMzI1ODQyOTUzZmRkNzMwODg3NGMwYjZmYWZhNWE4ZjJjYmRkNTJmMTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNDQ1ZTI2YmRmM2UyZWFjZGQxYTA3N2U3NTFmMTBiNzA1NWUyYmY3NGFmM2MxNGMwMTQwMWU4OTEwYTNhYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhZDRlNDhmNDY4NWQ2YmVkZGEzNWQxMjNiNWMyMWE0NTE0ZmNlNGEyNWEzY2U0OWQwZWQzZWIyNjIwYjkwOTAifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L210-L244",
+          "version": "repo-lines-v1:sha256:74aa32449503da8d950901707fa3631dbd8177a2bb25938164336a748206d877:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlZWI2MWM1OGZiMWY4YzQwY2NlYWI0MzYyMjIzNDhmZjdhZjQ5NmRiYjA0ODNhYjk0YTFjZjNiMjE3NmE3MDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZjUzNDBiYmYwZjFjNTEzODQ2MjRiZGFjNzE3YWJlMmViMGYwNGNhMzRiMTZjZjU3YjJlYjc5ZWM5MTFjYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5ZDA4N2VhN2IyNGFjODNmMGJlNGVlMDljNDg3YzE3MmMyOGMzMDA1ODgyMDhlOGY4M2Q0OGNkMDA0MDJkNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjM2RmY2IxZDZiMWMxZDRiZDY1MjBiYmJiMzA4YWJjOGZiMmRlMjVlZDJjMzI4YWU0ZmRkMzI0OTBiNWI0MWIifQ"
+        },
+        {
+          "resource": "repo://tests/test_integration.py#L9-L26",
+          "version": "repo-lines-v1:sha256:51daa35b9f0aed67a15d0dd5df3ce559a92937c5cf8b6d5b7bb0cb68524f64dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MjJlZTA3YjE4NWYwMmQzZDRlYjc2Mzc2MWY2Mzk0Yzk4NWU4NDI0ZTBhZGUxMDdhOTMyZDc3M2NlYjQwZGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1N2ViNmIwOTk4YzVkNzI5Yzg3MjE3Y2Q1MWFkNjE3NzFhZGNmNDc0NWUwYzNjNjI2ODBmMWY4NWRiNzczMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlZjU3Njg2ZjJkY2Y2ODcwNzNlMzA4MWFmM2JhNzVlNzFiNThjYWVmZWUyN2ViNGZlNTgzMTIyZjg1NDk3MmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_983539d6dca7470c867e11f90c726c93",
+      "statement": "If no parsed records survive normalization, search raises `NoResultsError`; otherwise it appends accepted records in provider document order without application-side sorting, preserving order among the inspected candidates.",
+      "evidence": [
+        {
+          "resource": "repo://DECISIONS.md#L7-L19",
+          "version": "repo-lines-v1:sha256:eb12e3fbe947108cd0a896701fc872f8fb4efffa422573f3e7e98b987501b08e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxMmRlMDRhYzQyYzAwNGEwNGNjOTAyNjc0YmE3Njg4OGQxZmU2OGI0OTdhZjg2ZmYzNDcxOTc3OGVhZjFlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzNjRjNWQwZmM5NDIwMGIxZTMwNDMxMjUyODI3MzRjMjFkZWViOGQ2NjQ4ZDg1NzM0OGMzY2E0NWM3N2I3YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlZTlhMzA1YTIxOGQ5Y2EwZDYyMDFiN2Q0ODMxY2VmZTllY2FmNWU4ZDNlMTVjZGEwM2FjZmFlOTFhYjlhM2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://quack/core.py#L134-L171",
+          "version": "repo-lines-v1:sha256:2c2b81ef7a3a86cee218fb4b43dff9e2e5206ffa18e185a41b854f2cb544fae0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5MTdkZTNmZjkyZjc3M2IwNjdhMmIwZWI0Nzg4NTI5NDYwNjdjZmMxZGNmMmQ0M2FmMzFjZjVlYmQ2ZDcwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0YzdkN2JhYzUzOGU3ODNiYzczMzQ2YTgzMTg3OTc4MWE4YTA4MTY0MTJlNDhjNzJjNDMxNjA2OWQ4ZWUwMTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2MzdhNWRkNjRhMDA0OWJlYmE1YTA0YzkzZTNjYTcwN2RmYTE3ZGE0MDBhNTYyZTRlNzVmNGQwMTA0ZWY4YjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiMTU3MTJmY2JkMzhmNDAxZGFlNDk2NmZhZGUxMjQ3MjllOTFkZGVlZjdjYjRhYjM3YjI1ZmQyMDJhODg4MmQifQ"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L183-L197",
+          "version": "repo-lines-v1:sha256:a319696f6aaaef1b4d0dcb7a09a1ab43dce13ca9dccc96b552d134bfd6a5d44f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZWM1Mjk3NTQ0YWIxZmQzNTU4ZmQ3NzgzNzFjZmYwNTJhNGVjNzVhYzQ5YTIzNDcwOTI5NTRjMzczYTJjNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzNzI4Mzg5ZDdjY2Q4YWY2YTZmOGRiZTRkNmYyMDgyNjVjNDAzNzc5ZDkxMDY5ZmY3MGY4MDBiNWNhZWFiZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZjMWMxZWU4ZTBjMzlkMjgzZmZjY2MxZmMxNzg1MzViODkwN2I5N2MzMjhjMmVlMTBkMGZiZTMzMjE3ODc2YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRhZjE4MWY1MDE3NjI1YmVmNTJkN2Q3YjUwMmE5MDBmN2U1NWFiNjliNGY5OTM3YTMxNTNlZTVkMGJhNzIyM2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_58f5aab8b6984ed2a1ded34c061e7a94",
+      "statement": "Mocked core tests cover validation, redirect extraction, record cleanup, no-result behavior, transient retry, and challenge fail-fast behavior, while the integration test exercises a live DuckDuckGo query and asserts the three-field record shape and cleaned redirect URLs.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_core.py#L20-L197",
+          "version": "repo-lines-v1:sha256:cbede02c04c03ff6568bef01e36d206a9867b5005b23ab9f8b0d853ddd54e522:eyJzZWxlY3RlZExpbmVDb3VudCI6MTc4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzYzQ2NzliNzVlOGNjOWRiYmFhNzBkMzcyYzEzMDU5OTllZDdhZTA5NDg5MmY4YzM1ODM4ZTZhNzU1MzNiNzczIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1MzcyODM4OWQ3Y2NkOGFmNmE2ZjhkYmU0ZDZmMjA4MjY1YzQwMzc3OWQ5MTA2OWZmNzBmODAwYjVjYWVhYmYxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJhOThiMDYzZDliNDdlNjUzNzk2MjU1NzJjY2UxOTc2NjlkNTc2N2UxMmMxOGJlMDc1NjUyYjhjZDk4MWNlOGQ1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0YWYxODFmNTAxNzYyNWJlZjUyZDdkN2I1MDJhOTAwZjdlNTVhYjY5YjRmOTkzN2EzMTUzZWU1ZDBiYTcyMjNhIn0"
+        },
+        {
+          "resource": "repo://tests/test_core.py#L200-L274",
+          "version": "repo-lines-v1:sha256:f9fc24d3441e43cc54045f758080be004965202a1650e07705b59df3ff46c780:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmOTZmM2E1OTU5M2Y4ZWM4MDM1YzI0ODI4OThkMzNmZjZmNDUwODY2YTU4ZDhkMWZiM2I4MDViZTJjMGJhNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2ZGJiMDkwYmU0ODRkODM1M2Y2OWI2MjYwZGE0MmIzNjYzMWRmNGNkNTQ4ZTc1MmY1MTk0MTNhYTM0MmE0N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzNDRkZjA3YzNiNmYzMzUxYjQ0NzQ2MWU5ZDFmY2FlMDVhNmE4NDUwNDVmODEwYzNmYjY0NGUwNzlmNWVkMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkODM4ZWNiNTA5NzcwNTQwOGZiMTI4NDk0MTMyOTZlMDQ1ZjhjZWU4NTllZjg4NDRmOTc4NDAwMThlNjI0N2QifQ"
+        },
+        {
+          "resource": "repo://tests/test_integration.py#L1-L26",
+          "version": "repo-lines-v1:sha256:a62eab038b05cc57eff662cf48393d7446680724b7a4ea2d4a144bf0335b3c14:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjYTQwZjIxNDI5MzcxMjUwNjM5YWE2NjlkNzVkODJkNTJjZjFlZWZhMmIyNWYwMjE2YjIzNzRjNjNkMmExZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1N2ViNmIwOTk4YzVkNzI5Yzg3MjE3Y2Q1MWFkNjE3NzFhZGNmNDc0NWUwYzNjNjI2ODBmMWY4NWRiNzczMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-16T14:26:49.981Z"
+  }
+}

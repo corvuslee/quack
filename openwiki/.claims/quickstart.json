@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4d76274c33121a4d268b386a8b0e883c197224b8f7f1d9527aca554d8a8f2a8b",
+  "claims": [
+    {
+      "id": "claim_e8444275bad947f681e5d5cf4b454a19",
+      "statement": "The project requires Python >=3.14, pins 3.14 in `.python-version`, and its CI reads that file before performing `uv sync --locked --all-extras --dev`.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L14-L24",
+          "version": "repo-lines-v1:sha256:3f29d6a294fdaca21ee41c746dcf2a698d3e9fc0972944a2508b7b87cc472607:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkZjcwN2EzOTM4MzMyZDc3NDA4OTA5YzE5NDk3MzkzZTM4YzY1ZjY5ODY5NWNlNzhmYmIyYzU2ZDE4ZTExMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1NjNiYmE0MmNkMjhiMjQ4ODY1ZWYyNzVlZDNiOWUzYzJiNDZhYjAzNmM2ZjdmMTEwNzk2MmUzOWIyNzg2YmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzNWI5OWM1YTc2OWVkZmVmZTVmODNlMDg1MDllNjBiODQxZDk4N2M2NzcxN2VlMDdjZGUyOTJmMzU2NmQ0YmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5NTUyZDllMzllMGNhZGUzM2JjZTMxZjcwOTg5ZDE5NTg1OThjYmE0ZTNlYTI4ZGVhNmQ4M2I2NjMzM2RlMWEifQ"
+        },
+        {
+          "resource": "repo://.python-version#L1-L1",
+          "version": "repo-lines-v1:sha256:a876e0b10411037a012498b9fe18d9bc1df32ed8b722a13564dc944ddcfd9135:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTg3NmUwYjEwNDExMDM3YTAxMjQ5OGI5ZmUxOGQ5YmMxZGYzMmVkOGI3MjJhMTM1NjRkYzk0NGRkY2ZkOTEzNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTg3NmUwYjEwNDExMDM3YTAxMjQ5OGI5ZmUxOGQ5YmMxZGYzMmVkOGI3MjJhMTM1NjRkYzk0NGRkY2ZkOTEzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L1-L4",
+          "version": "repo-lines-v1:sha256:cc24035f94172288f5656198085ece4135e85fa8537aaf182770cda9a8b4d906:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzAyYTgxYzM4MzZlZGVmMmQwYmExMWQyMzUzZmI2ZGFiYzc3NzE1MGE3Y2E4M2VhMGQ5ZTlhNzAzMTNmZWFiYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWZhMjZiMDE1OWY0NmRhYTdiYmYwYTc5Y2EwYmY2YTU4MDkxZWY0MDAxODA4YzM5ZjJjZWZkMGZkZTEyYTQ5MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb892d6eff514ba3a52839a681f4bd07",
+      "statement": "CI runs Ruff linting, Ruff formatting verification, pytest, and `uv build` after the locked all-extras development sync, and uploads `dist/` as an artifact.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L23-L30",
+          "version": "repo-lines-v1:sha256:7920772c07c348752efabb2f00f3846e3e5344c786232a4fc470c159e2854f8b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA1ZGRiOTlmMmQxNTMzOTk1ZWE2M2E3MGUwN2M3MTAxM2E2ODRhMDA3ZTc0OGYzYzE5MTFkN2NmMDRkNDhmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWRmYWU1ODc5NTU0NjJhZTBjZGEzZmRhMDdkMjk4N2IwNjI4MzI0ZTZmYjA4NjdiNDM5Mjg1NzgxNzQ3YTI3MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTBkMDMyMTgxOTUzNmNhMTk3ZDRmOTEzMjk3YzBmZmEwYmIzM2FiYjEyNjA1ZGM5MGFhYWM4MzBmMjFiNDkxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjNjZjQ5MDgzNTNjZWEzOGU1OTk4MWY0OWYwYjM1NDIxZmUyM2RjNjAyOGY0MmJkZWEyNTgyMjA2MjExODVkOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1dd20de6dd844e39a82ebacebf7630ff",
+      "statement": "Packaging exposes the `quack` console command through `quack.cli:main`, while the package facade re-exports search/fetch and conditionally adds render names only when importing the render module succeeds.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L17-L18",
+          "version": "repo-lines-v1:sha256:4ca8fef2547d210b257084473192b3e8cf77c9ab40925a70d857e09023e2b260:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGVhYjRlYzYzZGU1MTdkYTRjZDhlNWM4MzA3ZmIyYzc3MzdkMzkxOTBhYjY5ZjMyYTVlOWVmODFlYTQ0MTZkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZjYTg2MDg5N2NmZTI3MmIzYTlhZjIwMDQ0OWZlNTc4NmMyZWVkYjkwNTVlOTljY2M3NjdmOGQyYjdlMTliYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTY1NTE1YjNkZmQyZDAxNThjNjI2ZDljMGM3ZjVmYTY2Y2RhZTdmMzM5NTM2OWZlMDc5N2Y4ZjBmZmViMTg2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGQ3ODljNTUyYjhkNWYxY2E4YjNjY2RhYTc2NWZmNmQxOTAzNTJkMjYyM2MzZTAyYjM3NGUzYjVkMmExM2QxMyJ9"
+        },
+        {
+          "resource": "repo://quack/__init__.py#L26-L44",
+          "version": "repo-lines-v1:sha256:92d40c84d72476c832c8637e37891fc5f8052cc9128e5daaf34d8814e1dfb3e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkNGQ3N2EwYTU0MzZiZjIyYjBkOGM3ZmYyMGY3ZmY3N2M0ZjFjYjMyYzZhOGM5MWQ1MDJkODJjYTY2Njc2YjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZmY4ZGM1NjE1NjhmNTA5NzVmZDMwYmE5ODExNWU4NGRiYTUwNWVjMWYzNWQxNDY1ZTdhNjZjZDI1MDZmM2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0NDVmYzA0MGViM2M5MmFkNmFjYzQ1N2ZiMWY5MzEyMzc5NWQxMmUyZTQ3ZGU3MTIyZGFjYTQyMGE2NzQ4YjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://quack/__init__.py#L3-L25",
+          "version": "repo-lines-v1:sha256:f3337599954b67ebc26f5430e593f0061dc2fe81302fbc364a03f498090febba:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjNmUxMzQ4OWFiZWVhNjhiZjc1ODk2Mjg4Mjg2NWJiMTQwNDVhYzhlNzA0NWFhZjRjNDU0NzNhM2MxNWMwODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YjVlOTFjM2JiNzdhYjkzM2MyNWZkNjVlYmE4ODM0MTliZGM1NjkxY2M5NGNiOWRjODQwZThmNGUzNjc0ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhkODlhMzQwOTQ1Y2RjNjk1NDQ2ZjkyZjg5Zjg4MTE4MGUwMGMxYTBiNDliNjUwZmM1MmU5MmZmZjNjMjg4YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiZTExZjExNzQ3ODMxZjAwNDJmMGVkM2NkYTA2MTA5ZGZlNTFkMDBiMTI0M2IwMTFlMDk0MGI3NWEwZTMxYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e0c223c670a945ad806be46f7138f078",
+      "statement": "The CLI owns argument parsing and process-facing output: it delegates search, fetch, and render calls, optionally writes retrieval output to a UTF-8 file, and maps ValueError, LibraryError, and other exceptions to stderr plus exit status 1.",
+      "evidence": [
+        {
+          "resource": "repo://quack/cli.py#L29-L155",
+          "version": "repo-lines-v1:sha256:fdcb21ff490c3fde0d52b7ea8086f62c34434530f534f77cbc19ca0f2f4e603b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjMmUzMTI1N2RjMGFlMWQ1OTMwMzdjMjgwYzlhZDUwODE5YjhhNmM4Y2Y3MjhiZTA3MTZkMDBhM2VlY2MwNGJiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2YWQ2NGE0YmU0NWMyMzA2Y2RiYWFhZDYxMzU3MTgyNmFmMDAyMjgwODkzNDYxYWU5NDgzYjk1OTc4ZGQzYjkzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyZWU1NmJiNDBmZWM1NDVmYTFhYmQzMjY1ZTZlMjVmZTRmODFmYzJhMTMwZDE5YTUyNjBjZjMzOWZhMzRiM2RkIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_0307a55f4648473a95974fb0d24b3f1c",
+      "statement": "Core search and fetch use the same freshly created browser-impersonating `primp.Client`, while SeleniumBase is confined to the optional `render` dependency and lazily imported by the renderer.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L11-L15",
+          "version": "repo-lines-v1:sha256:e4a498c5c9a1c05f24cb0e4ea1054d3840a6535cd6fcd8085c22fd9800bee15a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ5NWY1ZTllZGUwMTgxNjA0M2MwNzk3YWNlOGRhMmFjNGU5OWE4YTZhNjEwZmE5ODU3MGVmMzRiOTM1NjEwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGU3NGNiYzNmYTE2NGUwNWVhNDE5OTI0Mzk2YWE4OGUzYWNkZTg0OTY2NzJmMjFiNjg5YzM2Zjg4MDk3ZTA4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTU0NzIzM2VlYjQ3ZjhmMThiYjU1NDNkN2UwYWUxMzEwNjYxZDhkNmE5NDNhOGE4ZWM4NzkzZDBhOTQ3NTYzZCJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L24-L31",
+          "version": "repo-lines-v1:sha256:f2a0303f36681281e7c2f191b079ddfd2b1ca5a818637589c40cccfb2f86c6b6:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTkyMThkYzRjZTk3MWNiZTNkMzhkNzc0MzBlNjM5OTE4ODg0ZGQ3N2Q3MTg0YzdiOTNkZmRjMmU5OTg2OTFiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTgwN2FhZDhjZTAwOWMzNDIyMzhhMWFhMmVlMzMxMTM2MjQxOTExZjc5NWUzNDk2MzBiYmFlNjljYmRlMmVhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjkwNWJkZWQwNjQ0MDE5ODI4NDkwYjFkNTZjOTA2YTQ4YTk4YzIwM2JlMTY5MDNiNGZmNTIwMmI5NTRmYjZhZSJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L103-L103",
+          "version": "repo-lines-v1:sha256:8261d810ea74e06e8f9329e13501a94e1aa677852e1ac634b4397d9f1e045dcd:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODI2MWQ4MTBlYTc0ZTA2ZThmOTMyOWUxMzUwMWE5NGUxYWE2Nzc4NTJlMWFjNjM0YjQzOTdkOWYxZTA0NWRjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODI2MWQ4MTBlYTc0ZTA2ZThmOTMyOWUxMzUwMWE5NGUxYWE2Nzc4NTJlMWFjNjM0YjQzOTdkOWYxZTA0NWRjZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzM1ZDBjOTg2ZmZlNmVjOTk4YTBiNTMxMzAzMDI1ZDhhNzIwNzM3M2VkODg0NjU3MDA2ZWQ5NWFjNjExNzJkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDM0OTdiNDgzYmQ1MDJmZjMyYzg0ZGY2OGZlZWRlYTg4YjM5MWNmODIxN2UzMTJlYzdlMTFiNTMxY2I5YjA5YSJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L299-L305",
+          "version": "repo-lines-v1:sha256:5012608d06de0564cf6ec2fdf08152faf36e2309c192dd11d64dcaaea58f07c5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODI2MWQ4MTBlYTc0ZTA2ZThmOTMyOWUxMzUwMWE5NGUxYWE2Nzc4NTJlMWFjNjM0YjQzOTdkOWYxZTA0NWRjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI3ZWMzYmFmNzg3YWRmYjFiYmU0ZmMzODkzMThhZjUzZGEzYjRjODEzZWQ0YWEzYTI5ZTkyOGYzMjQyNTZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzM1ZDBjOTg2ZmZlNmVjOTk4YTBiNTMxMzAzMDI1ZDhhNzIwNzM3M2VkODg0NjU3MDA2ZWQ5NWFjNjExNzJkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGZhOTc5NTQ1ODc0ZWEzNmVjNGUwN2I1YTJhMTIzMmRlMzdmYzgzZDVjMTBhOWQyZTg1ZDliNzk3YzJjMDNhZiJ9"
+        },
+        {
+          "resource": "repo://quack/core.py#L60-L66",
+          "version": "repo-lines-v1:sha256:7862be779299840a54a64eee107aa90356b80d35996c2e6d4547c713a5c7728b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDAzMGNlZjk1NjZiNjk4MmQwOWU5MGRhZDJkOTQ3NDc0YTJiZWE5ZjkzYjVlYmEyNGUyODhiMjdjYmNlMWQ3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzg1MjVlNzczZTQxYTM1YTQxMjZlZjk5Yjg5NmQzMGMzODk5NDkzM2M3M2JhYWJlYjc3ZWQwNDBiZjViZWNmNSJ9"
+        },
+        {
+          "resource": "repo://quack/render.py#L45-L60",
+          "version": "repo-lines-v1:sha256:dad8c03395d3f1d6e0f9c3f272f491e9725469dcb6473d51ecce0761174c3e9a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYTVjNjZlMTdiMTQ1Mzk3ODM0YjhjODU0ZGM0MTkzZTIxMjUxODBhODk5NmExNGMzMTg4MzMyNmIyZWZiY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwMzE3MzU5YjJiOThlMjYxNWVmNmNkYWQwZjMwMzRmMWU2MDU1YWQ4NTA0MDU1NmUxNDVhMjlkMzlhYWFhMDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1MGVkYTQ3ZDhjNDAxMmQ2NDI4NTNhZjZjMTc5YzRhODFlYjUwNjJiOTg3Zjg5NGNmYjJmMmI0ZWNiM2M3OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhNjcyNDdmZGYyMmNhZjBkMTkzYzk3MWIyNzNmZjUzZDBjMmEyMDYxMmQ2MWE2NzIyMzhhZDA0ZDM0NWVkNDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c1a114f932743af91d3477c60b8534c",
+      "statement": "Search retry policy is limited to primp connection and timeout failures; it retries with capped exponential backoff, while challenge responses and no-result outcomes are raised without retry.",
+      "evidence": [
+        {
+          "resource": "repo://quack/core.py#L114-L188",
+          "version": "repo-lines-v1:sha256:a502e12fd13e7189c3a8cfe8427c3addd308d723c5a56f8bb8a2f9a820e2ff0b:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMDFkMjczOWU4ODA2YTFlYjIwNWU1MTU3MmNiZDdjMTFjMGI0MmE3MGQ0OTIyZjE4NDk1MmEwMGRkOWNiMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMGQxODc5Mzg3ZTBjODZjODE1ZGUzYzIzODYzZmY0Y2EzYmRhNGQwMDJlNzQ1MDUxYjRmMmQwZWNlODBmNmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMGZmOTk1N2MwMDIzZTI0NGZhYmI0OGI1NmU3MzllY2FhMTYwZTAwMjgyNTU5YTMxNDkxMTc4Mjc3ZWM1OGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViN2QxMTA5Y2U2ZTJlNTlhNTE5ZTc1NTExZTNkNDA4ZWJlNjMwMTVmOGI3YjAxOGMyZmMwZjMyM2ExMGU0OTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e72ff85672444f98906699800d9c067a",
+      "statement": "The repository has focused core, utility, CLI, render, and integration test modules; CI's plain pytest command runs that suite, including its external-boundary coverage when the environment supports it.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L23-L27",
+          "version": "repo-lines-v1:sha256:228ecf62ed56dd6d548cea27c3ed85ae0214c58d0cc9b9cef71fcf6496c9027e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA1ZGRiOTlmMmQxNTMzOTk1ZWE2M2E3MGUwN2M3MTAxM2E2ODRhMDA3ZTc0OGYzYzE5MTFkN2NmMDRkNDhmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JhMTkxZGU4Y2Y0NjU1M2E5NmQ2N2ZlNjQ5ODE3NDc4MWI5ZjFjMDZlMTBjYzNiNjUyMzZkNmQxYTkyMGViMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTBkMDMyMTgxOTUzNmNhMTk3ZDRmOTEzMjk3YzBmZmEwYmIzM2FiYjEyNjA1ZGM5MGFhYWM4MzBmMjFiNDkxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGQxNjNlNWE1ZTkwMmViMDU2ZTNjMGYzNDI3MGU5NGQzODI2YjliNGU0NDhjOTI2ZWQ2MmJiNTU2MGJjYTg4MiJ9"
+        },
+        {
+          "resource": "repo://tests/test_cli.py",
+          "version": "repo-file-v1:sha256:282359192db73c2bec9b67e4bde35e58b346fbd4000d44fb53ef614719d7b0ec"
+        },
+        {
+          "resource": "repo://tests/test_core.py",
+          "version": "repo-file-v1:sha256:11af265c9fdbab9cbba13c05429cf1ab41f4f6e6c629bf2e4278722765e39329"
+        },
+        {
+          "resource": "repo://tests/test_integration.py",
+          "version": "repo-file-v1:sha256:a62eab038b05cc57eff662cf48393d7446680724b7a4ea2d4a144bf0335b3c14"
+        },
+        {
+          "resource": "repo://tests/test_render.py",
+          "version": "repo-file-v1:sha256:854b14143f56ec9320864fd72085550f30d841832442be6d2f43463e99ef0de8"
+        },
+        {
+          "resource": "repo://tests/test_utils.py",
+          "version": "repo-file-v1:sha256:d74452ec5d320c15f48af9e89e9d6568a8a53b07aafa82f8aff1c50a8bc5a002"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f888e946d764677b492d59764fd216a",
+      "statement": "Contributor instructions require uv for Python tasks and prescribe uninstalling the quack tool, cleaning its cache, and reinstalling from `.` when testing changes to the installed CLI.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L1-L8",
+          "version": "repo-lines-v1:sha256:76f16c87dfe914a6cfaf7e27f7d2a611ea44a2b35ac47681a371250e05821b4b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODlkZGFmZjg3ZDcwMGUxZWFmMzQwMDA4OTA3YjZjZDM5YThiN2NlYjEyNjM4M2Q1OGNiZmJmZDhhNmYzNDY3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTgyMTA0OGU1NWU0NWZmODM4N2E5YzA5NDg2MTViYzNkMmVhZTBlZTZhZTQxYWI3Nzg1ZjZlMWMwMjBlY2FlYiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-16T14:26:49.981Z"
+  }
+}
