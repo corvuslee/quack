@@ -1,5 +1,7 @@
 """Quack - DuckDuckGo search with browser impersonation."""
 
+from importlib.metadata import version as get_version
+
 from .core import (
     ChallengeError,
     FetchError,
@@ -22,7 +24,7 @@ try:
 except ImportError:
     _render_available = False
 
-__version__ = "0.3.0"
+__version__ = get_version("quack")
 __all__ = [
     "search",
     "fetch",
