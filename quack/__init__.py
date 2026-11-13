@@ -2,23 +2,24 @@
 
 from importlib.metadata import version as get_version
 
+from .cli import main
 from .core import (
     ChallengeError,
     FetchError,
     FetchRequestError,
-    NoResultsError,
     LibraryError,
+    NoResultsError,
     SearchError,
     SearchRequestError,
     fetch,
     search,
 )
-from .cli import main
-from .utils import validate_query, clean_query, filter_results
+from .utils import clean_query, filter_results, validate_query
 
 # Optional render import
 try:
-    from .render import render, RenderError  # noqa: F401
+    from .render import RenderError as RenderError
+    from .render import render as render
 
     _render_available = True
 except ImportError:
@@ -26,21 +27,21 @@ except ImportError:
 
 __version__ = get_version("quack")
 __all__ = [
-    "search",
-    "fetch",
-    "main",
-    "LibraryError",
-    "SearchError",
-    "NoResultsError",
     "ChallengeError",
-    "SearchRequestError",
     "FetchError",
     "FetchRequestError",
-    "validate_query",
+    "LibraryError",
+    "NoResultsError",
+    "SearchError",
+    "SearchRequestError",
     "clean_query",
+    "fetch",
     "filter_results",
+    "main",
+    "search",
+    "validate_query",
 ]
 
 # Add render to exports if available
 if _render_available:
-    __all__.extend(["render", "RenderError"])
+    __all__.extend(["RenderError", "render"])

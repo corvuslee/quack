@@ -1,7 +1,6 @@
 """Utility functions for Quack."""
 
 import re
-from typing import List, Dict, Optional
 from collections.abc import Mapping, Sequence
 
 
@@ -40,8 +39,8 @@ def clean_query(query: str) -> str:
 
 
 def filter_results(
-    results: Sequence[Mapping[str, Optional[str]]], min_title_length: int = 3
-) -> List[Dict[str, str]]:
+    results: Sequence[Mapping[str, str | None]], min_title_length: int = 3
+) -> list[dict[str, str]]:
     """
     Filter search results based on quality criteria.
 
@@ -63,9 +62,7 @@ def filter_results(
 
         # Filter out results with invalid URLs (handle None safely)
         href = result.get("href", "")
-        if href is None or not (
-            href.startswith("http://") or href.startswith("https://")
-        ):
+        if href is None or not href.startswith(("http://", "https://")):
             continue
 
         filtered.append(

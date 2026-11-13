@@ -1,7 +1,8 @@
 """Unit tests for render functionality."""
 
-import pytest
 from pathlib import Path
+
+import pytest
 
 
 class TestRenderFunction:

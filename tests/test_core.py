@@ -1,9 +1,9 @@
 """Unit tests for core search functionality."""
 
-import pytest
 from unittest.mock import MagicMock, patch
 
 import primp
+import pytest
 
 from quack.core import (
     ChallengeError,

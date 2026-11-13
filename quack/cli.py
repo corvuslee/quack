@@ -3,7 +3,6 @@
 import argparse
 import json
 import sys
-from typing import List, Dict
 
 from .core import (
     LibraryError,
@@ -144,17 +143,17 @@ Examples:
                 print(content)
 
     except ValueError as e:
-        print(f"Invalid input: {str(e)}", file=sys.stderr)
+        print(f"Invalid input: {e!s}", file=sys.stderr)
         sys.exit(1)
     except LibraryError as e:
         print(f"{type(e).__name__}: {e}", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
-        print(f"Unexpected error: {str(e)}", file=sys.stderr)
-        sys.exit(1)
+        print(f"Unexpected error: {e!s}", file=sys.stderr)
+        raise SystemExit(1) from e
 
 
-def _print_text_results(results: List[Dict[str, str]]):
+def _print_text_results(results: list[dict[str, str]]):
     """Print results in human-readable text format."""
     for i, result in enumerate(results, 1):
         print(f"{i}. {result['title']}")
