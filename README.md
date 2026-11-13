@@ -10,8 +10,12 @@ Support Python 3.11 - 3.14.
 
 - **Browser Impersonation**: Uses `primp` library to mimic real browser behavior
 - **API**: Python interface and CLI
-- **Minimal Dependencies**: Core requires only `primp`, `selectolax`, and `html2text`
+- **Minimal Dependencies**: Core requires only `primp`, `beautifulsoup4`, and `html2text`
 - (Optional) **JavaScript Rendering**: Render JavaScript pages with SeleniumBase UC Mode (much heavier dependencies)
+
+## Platforms
+
+Quack's core feature is pure Python. It would run on any platforms that [`primp` supports](https://pypi.org/project/primp/#files). Tested on MacOS (arm64), Linux (x86-64, x86-32).
 
 ## Installation
 

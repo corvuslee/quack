@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from urllib.parse import unquote, urlencode
 
 import primp
-from selectolax.parser import HTMLParser
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
@@ -52,10 +52,10 @@ def _is_challenge_response(response: object) -> bool:
     if "anomaly.js" in content or "challenge-form" in content:
         return True
 
-    document = HTMLParser(body)
+    document = BeautifulSoup(body, "html.parser")
     return any(
-        "cc=botnet" in str(form.attributes.get("action", "")).lower()
-        for form in document.css("form")
+        "cc=botnet" in str(form.get("action", "")).lower()
+        for form in document.select("form")
     )
 
 
@@ -130,28 +130,30 @@ def search(
             response.raise_for_status()
 
             # Parse HTML content
-            doc = HTMLParser(response.text)
+            doc = BeautifulSoup(response.text, "html.parser")
 
             # Extract search results
             results = []
-            result_elements = doc.css("div.result.web-result")
+            result_elements = doc.select("div.result.web-result")
 
             for element in result_elements[:max_results]:
                 try:
                     # Extract title and URL
-                    title_element = element.css_first("a.result__a, a.result__url")
+                    title_element = element.select_one("a.result__a, a.result__url")
                     if title_element:
-                        title = title_element.text(deep=True, separator=" ").strip()
-                        href = title_element.attributes.get("href", "")
+                        title = title_element.get_text(separator=" ").strip()
+                        href = title_element.get("href", "")
+                        if not isinstance(href, str):
+                            continue
 
                         # Clean URL
                         if href and ("/link?" in href or "duckduckgo.com/l/" in href):
                             href = _extract_clean_url(href)
 
                         # Extract description
-                        body_element = element.css_first("a.result__snippet")
+                        body_element = element.select_one("a.result__snippet")
                         body = (
-                            body_element.text(deep=True, separator=" ").strip()
+                            body_element.get_text(separator=" ").strip()
                             if body_element
                             else ""
                         )
