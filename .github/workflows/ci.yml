@@ -90,3 +90,14 @@ jobs:
             "$GITHUB_WORKSPACE/tests/test_core.py" \
             "$GITHUB_WORKSPACE/tests/test_cli.py" \
             "$GITHUB_WORKSPACE/tests/test_utils.py"
+
+  ci:
+    if: ${{ always() }}
+    needs: [code-quality-and-tests, build-distributions, python-compatibility]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require all CI jobs to pass
+        run: |
+          test "${{ needs.code-quality-and-tests.result }}" = "success"
+          test "${{ needs.build-distributions.result }}" = "success"
+          test "${{ needs.python-compatibility.result }}" = "success"
