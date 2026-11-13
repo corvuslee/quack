@@ -2,6 +2,7 @@
 
 import pytest
 from unittest.mock import patch, mock_open
+from quack import __version__
 from quack.cli import main, _print_text_results
 from quack.core import (
     FetchRequestError,
@@ -210,7 +211,7 @@ class TestCLIHelpAndVersion:
 
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
-        assert "0.3.0" in captured.out
+        assert captured.out == f"quack {__version__}\n"
 
     def test_help_flag(self, capsys):
         """Test help flag."""

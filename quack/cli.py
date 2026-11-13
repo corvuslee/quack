@@ -18,7 +18,7 @@ try:
     RENDER_AVAILABLE = True
 except ImportError:
     RENDER_AVAILABLE = False
-    render = None  # type: ignore
+    render = None
 
 # Import version directly to avoid circular import
 from importlib.metadata import version as get_version
