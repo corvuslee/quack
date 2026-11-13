@@ -34,14 +34,17 @@ uv tool install "git+https://github.com/corvuslee/quack.git[render]"
 ```python
 # Search
 from quack import search
+
 results = search("python programming", max_results=5)
 
 # Fetch webpage content
 from quack import fetch
+
 content = fetch("https://www.python.org")
 
 # Render JavaScript pages (requires [render] extra)
 from quack import render
+
 content = render("https://www.python.org")
 ```
 

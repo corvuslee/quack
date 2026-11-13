@@ -23,6 +23,7 @@ jobs:
       - run: uv sync --locked --all-extras --dev
       - run: uv run ruff check .
       - run: uv run ruff format --check .
+      - run: uv run ty check
       - run: uv run pytest
       - run: uv build
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

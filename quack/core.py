@@ -1,13 +1,15 @@
 """Core DuckDuckGo search functionality with browser impersonation."""
 
+import logging
 import re
 import time
-from typing import List, Dict, Optional
 from collections.abc import Mapping
-from urllib.parse import urlencode, unquote
+from urllib.parse import unquote, urlencode
 
 import primp
 from selectolax.parser import HTMLParser
+
+logger = logging.getLogger(__name__)
 
 
 class LibraryError(Exception):
@@ -68,7 +70,7 @@ def _create_browser_client():
 
 def search(
     query: str, max_results: int = 10, timeout: int = 30, max_retries: int = 3
-) -> List[Dict[str, str]]:
+) -> list[dict[str, str]]:
     """
     Search DuckDuckGo and return results.
 
@@ -163,6 +165,7 @@ def search(
 
                 except Exception:
                     # Skip individual result parsing errors
+                    logger.debug("Skipping a malformed search result", exc_info=True)
                     continue
 
             if not results:
@@ -207,7 +210,7 @@ def _extract_clean_url(duckduckgo_url: str) -> str:
     return duckduckgo_url
 
 
-def _clean_whitespace(text: Optional[str]) -> str:
+def _clean_whitespace(text: str | None) -> str:
     """Clean whitespace in text - strip and normalize spaces."""
     if not text:
         return ""
@@ -215,7 +218,7 @@ def _clean_whitespace(text: Optional[str]) -> str:
     return re.sub(r"\s+", " ", text)
 
 
-def _clean_result(result: Mapping[str, Optional[str]]) -> Optional[Dict[str, str]]:
+def _clean_result(result: Mapping[str, str | None]) -> dict[str, str] | None:
     """
     Clean and filter search results.
 
@@ -290,7 +293,7 @@ def fetch(url: str, timeout: int = 30, max_retries: int = 3) -> str:
         raise ValueError("URL must be a non-empty string")
 
     url = url.strip()
-    if not (url.startswith("http://") or url.startswith("https://")):
+    if not url.startswith(("http://", "https://")):
         raise ValueError("URL must start with http:// or https://")
 
     if not isinstance(max_retries, int) or max_retries < 0:

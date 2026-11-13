@@ -1,17 +1,19 @@
 """Unit tests for CLI functionality."""
 
+import sys
+from unittest.mock import mock_open, patch
+
 import pytest
-from unittest.mock import patch, mock_open
+
 from quack import __version__
-from quack.cli import main, _print_text_results
+from quack.cli import _print_text_results, main
 from quack.core import (
-    FetchRequestError,
     FetchError,
+    FetchRequestError,
     NoResultsError,
     SearchError,
     SearchRequestError,
 )
-import sys
 
 
 class TestCLIArgumentParsing:
@@ -88,9 +90,11 @@ class TestCLIErrorHandling:
         mock_search.side_effect = ValueError("Invalid query")
 
         test_args = ["search", "invalid query"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -102,9 +106,11 @@ class TestCLIErrorHandling:
         mock_search.side_effect = NoResultsError("No results found for query: test")
 
         test_args = ["search", "test"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -116,9 +122,11 @@ class TestCLIErrorHandling:
         mock_search.side_effect = SearchRequestError("Connection failed")
 
         test_args = ["search", "test"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -130,9 +138,11 @@ class TestCLIErrorHandling:
         mock_search.side_effect = SearchError("Generic search error")
 
         test_args = ["search", "test"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -144,9 +154,11 @@ class TestCLIErrorHandling:
         mock_search.side_effect = RuntimeError("Unexpected error")
 
         test_args = ["search", "test"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -205,9 +217,11 @@ class TestCLIHelpAndVersion:
     def test_version_flag(self, capsys):
         """Test version flag."""
         test_args = ["--version"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
@@ -216,9 +230,11 @@ class TestCLIHelpAndVersion:
     def test_help_flag(self, capsys):
         """Test help flag."""
         test_args = ["--help"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
@@ -288,9 +304,11 @@ class TestCLIFetchFunctionality:
         mock_fetch.side_effect = ValueError("Invalid URL")
 
         test_args = ["fetch", "invalid-url"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -302,9 +320,11 @@ class TestCLIFetchFunctionality:
         mock_fetch.side_effect = FetchError("Connection failed")
 
         test_args = ["fetch", "https://example.com"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()
@@ -316,9 +336,11 @@ class TestCLIFetchFunctionality:
         mock_fetch.side_effect = FetchRequestError("Request timeout")
 
         test_args = ["fetch", "https://example.com"]
-        with patch.object(sys, "argv", ["quack"] + test_args):
-            with pytest.raises(SystemExit) as exc_info:
-                main()
+        with (
+            patch.object(sys, "argv", ["quack"] + test_args),
+            pytest.raises(SystemExit) as exc_info,
+        ):
+            main()
 
         assert exc_info.value.code == 1
         captured = capsys.readouterr()

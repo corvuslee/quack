@@ -1,6 +1,6 @@
 """Unit tests for utility functions."""
 
-from quack.utils import validate_query, clean_query, filter_results
+from quack.utils import clean_query, filter_results, validate_query
 
 
 class TestValidateQuery:

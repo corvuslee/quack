@@ -1,12 +1,14 @@
 """Render webpage content using SeleniumBase UC Mode for JavaScript execution."""
 
+import logging
+
 from .core import LibraryError, _html_to_markdown
+
+logger = logging.getLogger(__name__)
 
 
 class RenderError(LibraryError):
     """Exception raised when render request fails."""
-
-    pass
 
 
 def render(
@@ -35,11 +37,7 @@ def render(
         raise ValueError("URL must be a non-empty string")
 
     url = url.strip()
-    if not (
-        url.startswith("http://")
-        or url.startswith("https://")
-        or url.startswith("file://")
-    ):
+    if not url.startswith(("http://", "https://", "file://")):
         raise ValueError("URL must start with http://, https://, or file://")
 
     try:
@@ -69,7 +67,7 @@ def render(
                 sb.uc_gui_click_captcha()
             except Exception:
                 # CAPTCHA handling is optional
-                pass
+                logger.debug("Optional CAPTCHA handling failed", exc_info=True)
 
             # Get rendered HTML
             html_content = sb.get_page_source()
@@ -80,4 +78,4 @@ def render(
             return markdown_content
 
     except Exception as e:
-        raise RenderError(f"Render failed: {str(e)}")
+        raise RenderError(f"Render failed: {e!s}") from e
