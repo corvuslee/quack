@@ -4,6 +4,8 @@
 
 A Python and CLI tool for searching DuckDuckGo and fetching webpages with browser impersonation. Designed for LLM agents and developers who need programmatic access to web search and fetch.
 
+Support Python 3.11 - 3.14.
+
 ## Features
 
 - **Browser Impersonation**: Uses `primp` library to mimic real browser behavior

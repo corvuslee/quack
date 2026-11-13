@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  ci:
+  code-quality-and-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -25,8 +25,68 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run ty check
       - run: uv run pytest
+
+  build-distributions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: ".python-version"
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.8"
+          enable-cache: true
       - run: uv build
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dist
           path: dist/
+
+  python-compatibility:
+    needs: build-distributions
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    env:
+      UV_PYTHON: ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.8"
+          enable-cache: true
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      - name: Prepare dependency and version checks
+        run: |
+          uv export --locked --no-dev --extra test --no-emit-project --no-hashes \
+            --output-file "$RUNNER_TEMP/quack-test-requirements.txt"
+          printf 'UV_TOOL_DIR=%s/quack-tools\nUV_TOOL_BIN_DIR=%s/quack-bin\n' "$RUNNER_TEMP" "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          uv run --no-project python -c 'import pathlib, tomllib; print("QUACK_VERSION=" + tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]["version"])' >> "$GITHUB_ENV"
+      - name: Install wheel
+        run: |
+          uv tool install --with-requirements "$RUNNER_TEMP/quack-test-requirements.txt" dist/*.whl
+      - name: Smoke test installed CLI
+        working-directory: ${{ runner.temp }}
+        run: |
+          uv run --no-project --python "$UV_TOOL_DIR/quack/bin/python" python -I -c 'import os, sys; actual = f"{sys.version_info.major}.{sys.version_info.minor}"; assert actual == os.environ["UV_PYTHON"], actual'
+          actual_version="$("$UV_TOOL_BIN_DIR/quack" --version)"
+          printf '%s\n' "$actual_version"
+          test "$actual_version" = "quack $QUACK_VERSION"
+          "$UV_TOOL_BIN_DIR/quack" --help
+      - name: Run core tests against installed wheel
+        working-directory: ${{ runner.temp }}
+        run: |
+          uv run --no-project --python "$UV_TOOL_DIR/quack/bin/python" \
+            python -I -m pytest -q --import-mode=importlib \
+            "$GITHUB_WORKSPACE/tests/test_core.py" \
+            "$GITHUB_WORKSPACE/tests/test_cli.py" \
+            "$GITHUB_WORKSPACE/tests/test_utils.py"
